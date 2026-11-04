@@ -12,7 +12,7 @@ body:
     id: epic
     attributes:
       label: 親エピック
-      description: エピックの子 Issue なら `Epic #番号` と書きます。エピックに属さない場合は「なし」
+      description: "エピックの子 Issue なら `Epic #番号` と書きます。エピックに属さない場合は「なし」"
       placeholder: "Epic #<番号>"
     validations:
       required: true
