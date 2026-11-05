@@ -21,6 +21,17 @@
 | created_at | datetime | null: false | 作成日時 |
 | updated_at | datetime | null: false | 更新日時 |
 
+### sessions
+
+どのユーザーがログインしているかを管理する。
+
+| カラム | 型 | 制約 | 説明 |
+|---|---|---|---|
+| id | bigint | null: false, unique: true | 主キー |
+| user_id | bigint | null: false, foreign_key: true | 外部キー |
+| created_at | datetime | null: false | 作成日時 |
+| updated_at | datetime | null: false | 更新日時 |
+
 ### recruitments
 
 募集内容を管理する。
