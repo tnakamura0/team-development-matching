@@ -1,4 +1,4 @@
-# <プロダクト名>
+# TeamUP!
 
 RUNTEQ で学習中の「チーム開発をしたい人」が、チーム開発のメンバーを募集したり、ほかの人の募集に応募することができるアプリです。
 意欲のある仲間が誰なのか分からない、個別に声をかけるしかない、という状況をなくし、募集要項を示したうえでメンバーを集められることを目指しています。
@@ -78,7 +78,7 @@ Rails のコマンドは、パソコンで直接ではなく `docker compose run
 
 ## 技術スタック
 
-Ruby 3.4.12 / Ruby on Rails 8.1.4 / PostgreSQL 17 / Hotwire（Turbo・Stimulus）/ Tailwind CSS v4 / RSpec / RuboCop / Docker Compose
+Ruby 3.4.12 / Ruby on Rails 8.1.4.1 / PostgreSQL 17 / Hotwire（Turbo・Stimulus）/ Tailwind CSS v4 / RSpec / RuboCop / Docker Compose
 
 ## ディレクトリ構成（主なもの）
 

@@ -1,4 +1,4 @@
-# キックオフ資料 — <プロダクト名>
+# キックオフ資料 — TeamUP!
 
 ## (1) プロダクトの目的とゴール
 
@@ -120,7 +120,7 @@ flowchart LR
 
 | 区分 | 採用技術 |
 |---|---|
-| 言語 / フレームワーク | Ruby 3.4.12 / Ruby on Rails 8.1.4 |
+| 言語 / フレームワーク | Ruby 3.4.12 / Ruby on Rails 8.1.4.1 |
 | フロント | TailwindCSS v4, Hotwire |
 | DB | PostgreSQL 17 |
 | テスト | RSpec、FactoryBot、Capybara、WebMock、SimpleCov |
