@@ -1,14 +1,14 @@
 # <プロダクト名>
 
-RUNTEQ で学習中の「チーム開発をしたい人」が、チーム開発のメンバーを募集したり、ほかの人の募集に応募したりできるアプリです。
+RUNTEQ で学習中の「チーム開発をしたい人」が、チーム開発のメンバーを募集したり、ほかの人の募集に応募することができるアプリです。
 意欲のある仲間が誰なのか分からない、個別に声をかけるしかない、という状況をなくし、募集要項を示したうえでメンバーを集められることを目指しています。
 
 ## はじめての方へ
 
 開発に参加する方は、次の順番で進めてください。
 
-1. **[開発環境の構築](docs/dev/setup.md)** — Docker と Git の準備から、アプリの起動・テストの実行まで
-2. **[開発の進め方](docs/dev/first-contribution.md)** — Issue の選び方、ブランチ、コミット、Pull Request を出すまで
+1. **[開発環境の構築](docs/dev/setup.md)（準備中）** — Docker と Git の準備から、アプリの起動・テストの実行まで
+2. **[開発の進め方](docs/dev/first-contribution.md)（準備中）** — Issue の選び方、ブランチ、コミット、Pull Request を出すまで
 3. **[キックオフ資料](docs/kickoff.md)** — プロダクトの目的、チームの役割、開発ルール
 
 困ったら Discord サーバーの「#相談・質問」テキストチャンネルで質問してください。
@@ -23,7 +23,7 @@ RUNTEQ で学習中の「チーム開発をしたい人」が、チーム開発�
 
 ## クイックスタート
 
-Docker Desktop と Git が入っていれば、次のコマンドで起動できます（詳しくは [開発環境の構築](docs/dev/setup.md)）。
+Docker Desktop と Git が入っていれば、次のコマンドで起動できます（詳しくは [開発環境の構築](docs/dev/setup.md)（準備中））。
 
 ```bash
 git clone git@github.com:tnakamura0/team-development-matching.git
@@ -56,7 +56,7 @@ Rails のコマンドは、パソコンで直接ではなく `docker compose run
 | ログを見る | `docker compose logs -f web` |
 | CSS を作り直す | `docker compose run --rm css bin/rails tailwindcss:build` |
 
-ほかのコマンドとトラブル対処は [開発環境の構築](docs/dev/setup.md) にまとめています。
+ほかのコマンドとトラブル対処は [開発環境の構築](docs/dev/setup.md)（準備中） にまとめています。
 
 ## ドキュメント
 
@@ -67,14 +67,14 @@ Rails のコマンドは、パソコンで直接ではなく `docker compose run
 | [キックオフ資料](docs/kickoff.md) | 目的とゴール、チームの役割、スケジュール、技術スタック、開発フロー、テスト方針、タスク管理、コミュニケーション |
 | [要件定義](docs/requirements.md) | ペルソナ、ユースケース、ユーザーストーリー、受入条件 |
 | [画面設計](docs/screens.md) | 画面一覧、画面遷移図 |
-| [データ設計](docs/data-model.md) | ER 図、テーブル定義 |
+| [データ設計](docs/data-model.md)（準備中） | ER 図、テーブル定義 |
 
 ### 開発者向け
 
 | ドキュメント | 内容 |
 |---|---|
-| [開発環境の構築](docs/dev/setup.md) | 必要なもの、起動、テスト、毎日の始め方、トラブル対処 |
-| [開発の進め方](docs/dev/first-contribution.md) | Issue → ブランチ → 実装 → コミット → Pull Request の手順 |
+| [開発環境の構築](docs/dev/setup.md)（準備中） | 必要なもの、起動、テスト、毎日の始め方、トラブル対処 |
+| [開発の進め方](docs/dev/first-contribution.md)（準備中） | Issue → ブランチ → 実装 → コミット → Pull Request の手順 |
 
 ## 技術スタック
 
