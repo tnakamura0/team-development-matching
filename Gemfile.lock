@@ -290,6 +290,7 @@ GEM
       rubocop-rails (>= 2.30)
     ruby-progressbar (1.13.0)
     securerandom (0.4.1)
+    simplecov (1.3.2)
     sshkit (1.25.1)
       base64
       logger
@@ -348,6 +349,7 @@ DEPENDENCIES
   rails (~> 8.1.4)
   rspec-rails
   rubocop-rails-omakase
+  simplecov
   stimulus-rails
   tailwindcss-rails
   thruster
