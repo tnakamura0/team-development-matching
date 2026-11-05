@@ -2,8 +2,12 @@ name: CI
 
 on:
   pull_request:
+    branches:
+      - main
+      - "epic/**"
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   scan_ruby:
@@ -65,3 +69,58 @@ jobs:
       - name: Lint code for consistent style
         run: bin/rubocop -f github
 
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: app_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d app_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      RAILS_ENV: test
+      DATABASE_HOST: localhost
+      DATABASE_PORT: 5432
+      DATABASE_NAME: app_test
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: password
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Build CSS
+        run: bin/rails tailwindcss:build
+
+      - name: Prepare database
+        run: bin/rails db:prepare
+
+      - name: Run RSpec
+        run: bundle exec rspec
+
+      - name: Upload system spec screenshots
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: screenshots
+          path: tmp/screenshots/
+          if-no-files-found: ignore
+
+      - name: Upload coverage
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: coverage
+          path: coverage/
