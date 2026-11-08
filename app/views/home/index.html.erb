@@ -1,7 +1,12 @@
-<h1>応募一覧</h1>
+<%# 仮のホーム画面です。該当issue時に差し替え予定です %>
+<div class="mx- auto md:w-2/3 w-full">
+  <h1 class="font-bold text-4xl mb-4">応募一覧</h1>
 
-<% if authenticated? %>
-  <%= button_to "ログアウト", session_path, method: :delete %>
-<% else %>
-  <%= link_to "ログイン", new_session_path %>
-<% end %>
+  <%# #9 AC-7 AC-10 ログイン中のみログアウトボタンを表示 %>
+  <% if authenticated? %>
+    <%= button_to "ログアウト", session_path, method: :delete,
+        class: "round-md p-4 bg-gray-600 hover:bg-gray-500 text-white font-medium cursor-pointer" %>
+  <% else %>
+    <%= link_to "ログイン", new_session_path,
+        class: "rounded-md p-4 bg-blue-500 hover:bg-blue-500 text-white font-medium cursor-pointer" %>
+  <% end %>
