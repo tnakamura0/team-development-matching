@@ -1,0 +1,7 @@
+<h1>応募一覧</h1>
+
+<% if authenticated? %>
+  <%= button_to "ログアウト", session_path, method: :delete %>
+<% else %>
+  <%= link_to "ログイン", new_session_path %>
+<% end %>
