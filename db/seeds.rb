@@ -8,7 +8,9 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-# テストアカウント
-User.find_or_create_by!(email_address: "test@example.com") do |user|
-  user.password = "password"
+# 開発環境用テストアカウント
+if Rails.env.development?
+  User.find_or_create_by!(email_address: "test@example.com") do |user|
+    user.password = "password"
+  end
 end
