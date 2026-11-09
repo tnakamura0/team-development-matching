@@ -14,9 +14,9 @@
 
 | カラム | 型 | 制約 | 説明 |
 |---|---|---|---|
-| id | bigint | null: false, unique: true | 主キー |
+| id | bigint | PK | 主キー |
 | name | string | null: false | ユーザー名 |
-| email | string | null: false | メールアドレス |
+| email_address | string | null: false, unique: true | メールアドレス |
 | password_digest | string | null: false | ハッシュ化したパスワード |
 | created_at | datetime | null: false | 作成日時 |
 | updated_at | datetime | null: false | 更新日時 |
@@ -27,8 +27,8 @@
 
 | カラム | 型 | 制約 | 説明 |
 |---|---|---|---|
-| id | bigint | null: false, unique: true | 主キー |
-| user_id | bigint | null: false, foreign_key: true | 外部キー |
+| id | bigint | PK | 主キー |
+| user_id | bigint | FK | 外部キー |
 | created_at | datetime | null: false | 作成日時 |
 | updated_at | datetime | null: false | 更新日時 |
 
@@ -38,8 +38,10 @@
 
 | カラム | 型 | 制約 | 説明 |
 |---|---|---|---|
-| id | bigint | null: false, unique: true | 主キー |
-| user_id | bigint | null: false, foreign_key: true | 外部キー（募集を作成したユーザー） |
+| id | bigint | PK | 主キー |
+| user_id | bigint | FK | 外部キー（募集を作成したユーザー） |
+| title | string | null: false | タイトル |
+| body | text |  | 募集内容 |
 | closing_date | date | null: false | 締切日 |
 | recruitment_limit | integer | null: false | 募集人数 |
 | dev_status | string | null: false | 応募者の状態 |
@@ -52,9 +54,9 @@
 
 | カラム | 型 | 制約 | 説明 |
 |---|---|---|---|
-| id | bigint | null: false, unique: true | 主キー |
-| user_id | bigint | null: false, foreign_key: true | 外部キー（応募したユーザー） |
-| recruitment_id | bigint | null: false, foreign_key: true | 外部キー（応募先の募集） |
+| id | bigint | PK | 主キー |
+| user_id | bigint | FK | 外部キー（応募したユーザー） |
+| recruitment_id | bigint | FK | 外部キー（応募先の募集） |
 | created_at | datetime | null: false | 作成日時 |
 | updated_at | datetime | null: false | 更新日時 |
 
@@ -64,8 +66,8 @@
 
 | カラム | 型 | 制約 | 説明 |
 |---|---|---|---|
-| id | bigint | null: false, unique: true | 主キー |
-| user_id | bigint | null: false, foreign_key: true | 外部キー（通知を受け取るユーザー: 募集者） |
-| application_id | bigint | null: false, foreign_key: true | 外部キー（通知原因の応募） |
+| id | bigint | PK | 主キー |
+| user_id | bigint | FK | 外部キー（通知を受け取るユーザー: 募集者） |
+| application_id | bigint | FK | 外部キー（通知原因の応募） |
 | created_at | datetime | null: false | 作成日時 |
 | updated_at | datetime | null: false | 更新日時 |
