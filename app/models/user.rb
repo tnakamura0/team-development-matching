@@ -10,5 +10,4 @@ class User < ApplicationRecord
 
   # パスワードを変更しない更新(passwordがnil)では長さチェックしない
   validates :password, length: { minimum: 8 }, allow_nil: true
-
 end
