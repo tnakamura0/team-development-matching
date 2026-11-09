@@ -4,7 +4,6 @@ RSpec.describe User, type: :model do
   describe "バリデーション" do
     subject(:user) { build(:user) }
 
-
     context "全ての属性が有効な場合" do
       it "有効である" do
         expect(user).to be_valid
