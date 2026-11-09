@@ -16,7 +16,7 @@
 |---|---|---|---|
 | id | bigint | PK | 主キー |
 | name | string | null: false | ユーザー名 |
-| email | string | null: false, unique: true | メールアドレス |
+| email_address | string | null: false, unique: true | メールアドレス |
 | password_digest | string | null: false | ハッシュ化したパスワード |
 | created_at | datetime | null: false | 作成日時 |
 | updated_at | datetime | null: false | 更新日時 |
