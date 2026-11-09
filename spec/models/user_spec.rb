@@ -1,65 +1,82 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe User, type: :model do
-  it "有効なファクトリを持つ" do
-    expect(build(:user)).to be_valid
-  end
+  describe "バリデーション" do
+    subject(:user) { build(:user) }
 
-  describe "メールアドレス" do
-    context "必須項目" do
-      it "空文字なら無効" do
-        user = build(:user, email_address: "")
-        expect(user).to be_invalid
-        expect(user.errors[:email_address]).to be_present
+
+    context "全ての属性が有効な場合" do
+      it "有効である" do
+        expect(user).to be_valid
       end
     end
 
-    context "一意性" do
-      it "同じメールアドレスが存在するなら無効" do
-        create(:user, email_address: "user@example.com")
-        user = build(:user, email_address: "user@example.com")
-        expect(user).to be_invalid
-        expect(user.errors[:email_address]).to be_present
+    describe "メールアドレス" do
+      context "空の場合" do
+        before { user.email_address = "" }
+
+        it "無効である" do
+          expect(user).to be_invalid
+          expect(user.errors[:email_address]).to be_present
+        end
       end
 
-      it "大文字小文字を区別せず無効になる" do
-        create(:user, email_address: "USER@example.com")
-        user = build(:user, email_address: "user@example.com")
-        expect(user).to be_invalid
-        expect(user.errors[:email_address]).to be_present
+      context "同じメールアドレスが存在する場合" do
+        before { create(:user, email_address: user.email_address) }
+
+        it "無効である" do
+          expect(user).to be_invalid
+          expect(user.errors[:email_address]).to be_present
+        end
+      end
+
+      context "大文字小文字だけが異なるメールアドレスが存在する場合" do
+        before { create(:user, email_address: user.email_address.upcase) }
+
+        it "無効である" do
+          expect(user).to be_invalid
+          expect(user.errors[:email_address]).to be_present
+        end
+      end
+
+      context "形式が不正な場合" do
+        before { user.email_address = "user" }
+
+        it "無効である" do
+          expect(user).to be_invalid
+          expect(user.errors[:email_address]).to be_present
+        end
+      end
+
+      context "前後に空白があり大文字を含む場合" do
+        before do
+          user.email_address = "  USER@Example.com "
+          user.save!
+        end
+
+        it "空白が除かれ小文字で保存される" do
+          expect(user.email_address).to eq "user@example.com"
+        end
       end
     end
 
-    context "形式" do
-      it "不正形式は無効になる" do
-        user = build(:user, email_address: "user")
-        expect(user).to be_invalid
-        expect(user.errors[:email_address]).to be_present
-      end
-    end
+    describe "パスワード" do
+      context "空の場合" do
+        before { user.password = nil }
 
-    context "正規化" do
-      it "前後の空白を除き小文字で保存される" do
-        user = create(:user, email_address: "  USER@Example.com ")
-        expect(user.email_address).to eq "user@example.com"
+        it "無効である" do
+          expect(user).to be_invalid
+          expect(user.errors[:password]).to be_present
+        end
       end
-    end
-  end
 
-  describe "Password" do
-    context "必須項目" do
-      it "空文字なら無効" do
-        user = build(:user, password: "")
-        expect(user).to be_invalid
-        expect(user.errors[:password]).to be_present
-      end
-    end
+      context "8文字未満の場合" do
+        before { user.password = "a" * 7 }
 
-    context "形式" do
-      it "8文字未満は無効" do
-        user = build(:user, password: "passpas")
-        expect(user).to be_invalid
-        expect(user.errors[:password]).to be_present
+        it "無効である" do
+          expect(user).to be_invalid
+          expect(user.errors[:password]).to be_present
+        end
       end
     end
   end

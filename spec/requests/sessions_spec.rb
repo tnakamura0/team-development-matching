@@ -9,67 +9,90 @@ RSpec.describe "Sessions", type: :request do
   end
 
   describe "GET /session/new" do
-    it "正常にアクセスできるか" do
-      get new_session_path
-      expect(response).to have_http_status(200)
+    context "未ログインの場合" do
+      before { get new_session_path }
+
+      it "正常にアクセスできる" do
+        expect(response).to have_http_status(:ok)
+      end
     end
 
-    it "ログイン済みならホーム画面にリダイレクトされる" do
-      log_in(user)
-      get new_session_path
-      expect(response).to redirect_to(root_path)
+    context "ログイン済みの場合" do
+      before do
+        log_in(user)
+        get new_session_path
+      end
+
+      it "ホーム画面にリダイレクトされる" do
+        expect(response).to redirect_to(root_path)
+      end
     end
   end
 
   describe "POST /session" do
-    it "正しい認証情報ならホーム画面にリダイレクトされる" do
-      log_in(user)
-      expect(response).to redirect_to(root_path)
+    context "正しい認証情報の場合" do
+      before { log_in(user) }
+
+      it "ホーム画面にリダイレクトされる" do
+        expect(response).to redirect_to(root_path)
+      end
+
+      it "ログイン成功のメッセージが表示される" do
+        follow_redirect!
+        expect(response.body).to include("ログインしました")
+      end
     end
 
-    it "ログイン成功のメッセージが表示される" do
-      log_in(user)
-      follow_redirect!
-      expect(response.body).to include("ログインしました")
-    end
+    context "パスワードが誤っている場合" do
+      before { log_in(user, password: "wrong") }
 
-    it "誤ったパスワードならログイン画面にリダイレクトされる" do
-      log_in(user, password: "wrong")
-      expect(response).to redirect_to(new_session_path)
-    end
+      it "ログイン画面にリダイレクトされる" do
+        expect(response).to redirect_to(new_session_path)
+      end
 
-    it "ログイン失敗時は共通のエラーメッセージが表示される" do
-      log_in(user, password: "wrong")
-      follow_redirect!
-      expect(response.body).to include("メールアドレスまたはパスワードが正しくありません")
+      it "共通のエラーメッセージが表示される" do
+        follow_redirect!
+        expect(response.body).to include("メールアドレスまたはパスワードが正しくありません")
+      end
     end
   end
 
   describe "DELETE /session" do
-    it "ログアウトできる" do
-      log_in(user)
-      delete session_path
-      expect(response).to redirect_to(root_path)
-    end
+    context "ログイン済みの場合" do
+      before do
+        log_in(user)
+        delete session_path
+      end
 
-    it "ログアウト成功のメッセージが表示される" do
-      log_in(user)
-      delete session_path
-      follow_redirect!
-      expect(response.body).to include("ログアウトしました")
+      it "ホーム画面にリダイレクトされる" do
+        expect(response).to redirect_to(root_path)
+      end
+
+      it "ログアウト成功のメッセージが表示される" do
+        follow_redirect!
+        expect(response.body).to include("ログアウトしました")
+      end
     end
   end
 
   describe "GET /" do
-    it "未ログイン時はログアウトボタンが表示されない" do
-      get root_path
-      expect(response.body).not_to include("ログアウト</button>")
+    context "未ログインの場合" do
+      before { get root_path }
+
+      it "ログアウトボタンが表示されない" do
+        expect(response.body).not_to include("ログアウト</button>")
+      end
     end
 
-    it "ログイン時はログアウトボタンが表示される" do
-      log_in(user)
-      get root_path
-      expect(response.body).to include("ログアウト</button>")
+    context "ログイン済みの場合" do
+      before do
+        log_in(user)
+        get root_path
+      end
+
+      it "ログアウトボタンが表示される" do
+        expect(response.body).to include("ログアウト</button>")
+      end
     end
   end
 end
