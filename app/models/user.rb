@@ -6,6 +6,9 @@ class User < ApplicationRecord
 
   validates :email_address, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 
+  validates :name, presence: true
+
   # パスワードを変更しない更新(passwordがnil)では長さチェックしない
   validates :password, length: { minimum: 8 }, allow_nil: true
+
 end
