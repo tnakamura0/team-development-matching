@@ -75,6 +75,7 @@ Rails のコマンドは、パソコンで直接ではなく `docker compose run
 |---|---|
 | [開発環境の構築](docs/dev/setup.md) | 必要なもの、起動、テスト、毎日の始め方、トラブル対処 |
 | [開発の進め方](docs/dev/first-contribution.md) | Issue → ブランチ → 実装 → コミット → Pull Request の手順 |
+| [コードレビューガイド](docs/dev/code_review_guide.md) | コードレビューの考え方・方法 |
 
 ## 技術スタック
 
