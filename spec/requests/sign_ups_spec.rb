@@ -60,5 +60,35 @@ RSpec.describe "SignUps", type: :request do
         }.not_to change(User, :count)
       end
     end
+    context "パスワードが空白の場合" do
+      let(:invalid_params) do
+        { user: attributes_for(:user, password: "") }
+      end
+      it "アカウントが作成できない" do
+        expect {
+          post sign_up_path params: invalid_params
+        }.not_to change(User, :count)
+      end
+    end
+    context "パスワードが8文字未満の場合" do
+      let(:invalid_params) do
+        { user: attributes_for(:user, password: "a" * 7) }
+      end
+      it "アカウントが作成できない" do
+        expect {
+          post sign_up_path params: invalid_params
+        }.not_to change(User, :count)
+      end
+    end
+    context "パスワードと確認用パスワードが一致しない場合" do
+      let(:invalid_params) do
+        { user: attributes_for(:user, password_confirmation: "mismatch") }
+      end
+      it "アカウントが作成できない" do
+        expect {
+          post sign_up_path params: invalid_params
+        }.not_to change(User, :count)
+      end
+    end
   end
 end
