@@ -13,6 +13,10 @@ module Authentication
   end
 
   private
+    def redirect_if_authenticated
+      redirect_to root_path if authenticated?
+    end
+
     def authenticated?
       resume_session
     end

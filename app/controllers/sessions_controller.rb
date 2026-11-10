@@ -22,8 +22,4 @@ class SessionsController < ApplicationController
 
   private
 
-  # ログイン済ならrootへ
-  def redirect_if_authenticated
-    redirect_to root_path if authenticated?
-  end
 end
