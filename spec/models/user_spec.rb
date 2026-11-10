@@ -10,6 +10,17 @@ RSpec.describe User, type: :model do
       end
     end
 
+    describe "名前" do
+      context "空の場合" do
+        before { user.name = "" }
+
+        it "無効である" do
+          expect(user).to be_invalid
+          expect(user.errors[:name]).to be_present
+        end
+      end
+    end
+
     describe "メールアドレス" do
       context "空の場合" do
         before { user.email_address = "" }
