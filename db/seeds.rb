@@ -11,6 +11,7 @@
 # 開発環境用テストアカウント
 if Rails.env.development?
   User.find_or_create_by!(email_address: "test@example.com") do |user|
+    user.name = "テスト太郎"
     user.password = "password"
   end
 end
