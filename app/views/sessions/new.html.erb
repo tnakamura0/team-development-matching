@@ -9,9 +9,13 @@
     <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "パスワード", maxlength: 72, class: "block shadow-sm rounded-md border border-gray-400 focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
   </div>
 
-  <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
+  <div class="flex flex-col gap-3">
     <div class="inline">
       <%= form.submit "ログインする", class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+    </div>
+
+    <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
+      <%= link_to "新規登録はこちら", sign_up_path, class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
     </div>
 
     <%# パスワード再設定はスコープ外のため非表示。要件が決まったら有効化 %>

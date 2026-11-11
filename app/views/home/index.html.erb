@@ -5,7 +5,7 @@
   <%# #9 AC-7 AC-10 ログイン中のみログアウトボタンを表示 %>
   <% if authenticated? %>
     <%= button_to "ログアウト", session_path, method: :delete,
-        class: "round-md p-4 bg-gray-600 hover:bg-gray-500 text-white font-medium cursor-pointer" %>
+        class: "rounded-md p-4 bg-gray-600 hover:bg-gray-500 text-white font-medium cursor-pointer" %>
   <% else %>
     <%= link_to "ログイン", new_session_path,
         class: "rounded-md p-4 bg-blue-500 hover:bg-blue-500 text-white font-medium cursor-pointer" %>
