@@ -36,7 +36,7 @@ RSpec.describe "SignUps", type: :request do
       end
       it "ユーザーが1件作成される" do
         expect {
-          post sign_up_path params: valid_params
+          post sign_up_path, params: valid_params
         }.to change(User, :count).by(1)
       end
     end
@@ -46,7 +46,7 @@ RSpec.describe "SignUps", type: :request do
       end
       it "アカウントが作成できない" do
         expect {
-          post sign_up_path params: invalid_params
+          post sign_up_path, params: invalid_params
         }.not_to change(User, :count)
       end
     end
@@ -56,7 +56,7 @@ RSpec.describe "SignUps", type: :request do
       end
       it "アカウントが作成できない" do
         expect {
-          post sign_up_path params: invalid_params
+          post sign_up_path, params: invalid_params
         }.not_to change(User, :count)
       end
     end
@@ -66,7 +66,7 @@ RSpec.describe "SignUps", type: :request do
       end
       it "アカウントが作成できない" do
         expect {
-          post sign_up_path params: invalid_params
+          post sign_up_path, params: invalid_params
         }.not_to change(User, :count)
       end
     end
@@ -76,7 +76,7 @@ RSpec.describe "SignUps", type: :request do
       end
       it "アカウントが作成できない" do
         expect {
-          post sign_up_path params: invalid_params
+          post sign_up_path, params: invalid_params
         }.not_to change(User, :count)
       end
     end
@@ -86,7 +86,7 @@ RSpec.describe "SignUps", type: :request do
       end
       it "アカウントが作成できない" do
         expect {
-          post sign_up_path params: invalid_params
+          post sign_up_path, params: invalid_params
         }.not_to change(User, :count)
       end
     end

@@ -1,6 +1,6 @@
 class SignUpsController < ApplicationController
-    allow_unauthenticated_access
-    before_action :redirect_if_authenticated
+  allow_unauthenticated_access
+  before_action :redirect_if_authenticated
   def show
     @user = User.new
   end
