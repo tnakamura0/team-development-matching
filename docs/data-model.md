@@ -53,12 +53,14 @@
 
 募集への応募を管理する。
 
+外部キーの組み合わせにはユニーク制約をつける。
+
 | カラム | 型 | 制約 | 説明 |
 |---|---|---|---|
 | id | bigint | PK | 主キー |
 | user_id | bigint | FK | 外部キー（応募したユーザー） |
 | recruitment_id | bigint | FK | 外部キー（応募先の募集） |
-| status | string | null: false, default: "応募済み・承認待ち" | 応募状況 |
+| status | string | null: false, default: "pending" | 応募状況 |
 | created_at | datetime | null: false | 作成日時 |
 | updated_at | datetime | null: false | 更新日時 |
 
