@@ -1,0 +1,19 @@
+<div class="p-4 border rounded-xl">
+  <%= link_to "#" do %>
+    <h2 class="font-medium text-2xl"><%= recruitment.title %></h2>
+    <p class="mt-1"><%= recruitment.body %></p>
+    <div class="mt-3">
+      <p>応募期限：<%= recruitment.closing_date %></p>
+      <p>募集人数：<%= recruitment.positions_count %></p>
+      <p>募集基準：<%= recruitment.required_status %></p>
+      <p>
+        応募状態：
+        <% if recruitment.accepting_applications %>
+          <span>募集中</span>
+        <% else %>
+          <span>募集停止中</span>
+        <% end %>
+      </p>
+    </div>
+  <% end %>
+</div>

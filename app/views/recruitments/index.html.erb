@@ -1,4 +1,14 @@
 <div>
-  <h1 class="font-bold text-4xl">Recruitments#index</h1>
-  <p>Find me in app/views/recruitments/index.html.erb</p>
+  <h1 class="font-bold text-4xl">仲間を探す</h1>
+  <p>気になる募集から、チーム開発の第一歩を。</p>
+
+  <div class="mt-4">
+    <% if @recruitments.present? %>
+      <div class="space-y-3">
+        <%= render @recruitments %>
+      </div>
+    <% else %>
+      <p>現在募集がありません</p>
+    <% end %>
+  </div>
 </div>
