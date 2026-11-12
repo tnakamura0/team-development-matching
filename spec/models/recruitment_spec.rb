@@ -1,0 +1,79 @@
+require "rails_helper"
+
+RSpec.describe Recruitment, type: :model do
+  describe "バリデーション" do
+    subject(:recruitment) { build(:recruitment) }
+
+    context "全ての属性が有効な場合" do
+      it "有効である" do
+        expect(recruitment).to be_valid
+      end
+    end
+
+    context "titleが空の場合" do
+      before { recruitment.title = "" }
+
+      it "無効である" do
+        expect(recruitment).to be_invalid
+        expect(recruitment.errors[:title]).to be_present
+      end
+    end
+
+    context "closing_dateが空の場合" do
+      before { recruitment.closing_date = nil }
+
+      it "無効である" do
+        expect(recruitment).to be_invalid
+        expect(recruitment.errors[:closing_date]).to be_present
+      end
+    end
+
+    context "positions_countが空の場合" do
+      before { recruitment.positions_count = nil }
+
+      it "無効である" do
+        expect(recruitment).to be_invalid
+        expect(recruitment.errors[:positions_count]).to be_present
+      end
+    end
+
+    context "required_statusが空の場合" do
+      before { recruitment.required_status = nil }
+
+      it "無効である" do
+        expect(recruitment).to be_invalid
+        expect(recruitment.errors[:required_status]).to be_present
+      end
+    end
+
+    context "accepting_applicationsが空の場合" do
+      before { recruitment.accepting_applications = nil }
+
+      it "無効である" do
+        expect(recruitment).to be_invalid
+        expect(recruitment.errors[:accepting_applications]).to be_present
+      end
+    end
+  end
+
+  describe "デフォルト値" do
+    it "新規作成直後の募集が募集中となる" do
+      recruitment = Recruitment.new
+
+      expect(recruitment.accepting_applications).to be true
+    end
+  end
+
+  describe "アソシエーション" do
+    it "ユーザーを削除すると関連する募集も削除される" do
+      user = create(:user)
+      recruitment = create(:recruitment, user:)
+
+      expect {
+        user.destroy!
+      }.to change(User, :count).by(-1)
+
+      expect(Recruitment.exists?(recruitment.id)).to be false
+    end
+  end
+end
