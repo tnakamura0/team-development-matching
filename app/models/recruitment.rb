@@ -10,6 +10,6 @@ class Recruitment < ApplicationRecord
 
   validates :title, presence: true
   validates :closing_date, presence: true
-  validates :positions_count, presence: true
+  validates :positions_count, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates :accepting_applications, inclusion: [ true, false ]
 end

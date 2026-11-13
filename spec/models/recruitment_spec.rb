@@ -37,6 +37,34 @@ RSpec.describe Recruitment, type: :model do
       end
     end
 
+    context "positions_countが正の数の場合" do
+      context "整数の場合" do
+        before { recruitment.positions_count = 1 }
+
+        it "有効である" do
+          expect(recruitment).to be_valid
+        end
+      end
+
+      context "小数の場合" do
+        before { recruitment.positions_count = 0.1 }
+
+        it "無効である" do
+          expect(recruitment).to be_invalid
+          expect(recruitment.errors[:positions_count]).to eq([ "must be an integer" ])
+        end
+      end
+    end
+
+    context "positions_countが0以下の場合" do
+      before { recruitment.positions_count = 0 }
+
+      it "無効である" do
+        expect(recruitment).to be_invalid
+        expect(recruitment.errors[:positions_count]).to eq([ "must be greater than 0" ])
+      end
+    end
+
     context "required_statusが空の場合" do
       before { recruitment.required_status = nil }
 
