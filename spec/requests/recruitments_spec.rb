@@ -36,16 +36,15 @@ RSpec.describe "Recruitments", type: :request do
     end
 
     context "存在しない募集の場合" do
-      it "404 Not Foundが返る" do
-        expect {
-          get recruitment_path(id: 9999)
-        }.to raise_error(ActiveRecord::RecordNotFound)
+      it "404になる" do
+        get recruitment_path(id: 9999)
+        expect(response).to have_http_status(:not_found)
       end
     end
 
     context "投稿者がログインしている場合" do
       let!(:user) { create(:user) }
-      let!(:recruitment) { create(:recruitment, user: user) }
+      let!(:recruitment) { create(:recruitment, user: user, title: "募集タイトル", body: "募集本文") }
 
       before do
         post session_path, params: { email_address: user.email_address, password: user.password }
@@ -63,7 +62,7 @@ RSpec.describe "Recruitments", type: :request do
     context "投稿者以外のユーザーがログインしている場合" do
       let!(:user) { create(:user) }
       let!(:other_user) { create(:user) }
-      let!(:recruitment) { create(:recruitment, user: other_user) }
+      let!(:recruitment) { create(:recruitment, user: other_user, title: "募集タイトル", body: "募集本文") }
 
       before do
         post session_path, params: { email_address: user.email_address, password: user.password }
