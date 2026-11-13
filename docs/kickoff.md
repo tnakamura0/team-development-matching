@@ -126,7 +126,7 @@ flowchart LR
 | テスト | RSpec、FactoryBot、Capybara、WebMock、SimpleCov |
 | 品質 | RuboCop、Brakeman、bundler-audit, importmap-audit, Bullet |
 | 環境 | Docker Compose web / db |
-| デプロイ | Render + Neon |
+| デプロイ | Railway + Neon |
 
 セットアップの手順は [開発環境の構築](dev/setup.md) を参照。
 
