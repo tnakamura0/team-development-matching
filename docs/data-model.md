@@ -49,6 +49,14 @@
 | created_at | datetime | null: false | 作成日時 |
 | updated_at | datetime | null: false | 更新日時 |
 
+#### required_status の値（enum）
+
+| 値 | 意味 |
+|---|---|
+| basic_step_completed | 基礎STEP完了 |
+| advanced_step_completed | 応用STEP完了 |
+| graduated | 卒業済み |
+
 ### applications
 
 募集への応募を管理する。
