@@ -23,4 +23,71 @@ RSpec.describe "Recruitments", type: :request do
       end
     end
   end
+
+  describe "GET /recruitments/:id" do
+    let!(:recruitment) { create(:recruitment, title: "募集タイトル", body: "募集本文") }
+
+    it "募集の詳細が表示される" do
+      get recruitment_path(recruitment)
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include("募集タイトル")
+      expect(response.body).to include("募集本文")
+    end
+
+    context "存在しない募集の場合" do
+      it "404 Not Foundが返る" do
+        expect {
+          get recruitment_path(id: 9999)
+        }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+
+    context "投稿者がログインしている場合" do
+      let!(:user) { create(:user) }
+      let!(:recruitment) { create(:recruitment, user: user) }
+
+      before do
+        post session_path, params: { email_address: user.email_address, password: user.password }
+      end
+
+      it "募集の詳細が表示される" do
+        get recruitment_path(recruitment)
+
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include("募集タイトル")
+        expect(response.body).to include("募集本文")
+      end
+    end
+
+    context "投稿者以外のユーザーがログインしている場合" do
+      let!(:user) { create(:user) }
+      let!(:other_user) { create(:user) }
+      let!(:recruitment) { create(:recruitment, user: other_user) }
+
+      before do
+        post session_path, params: { email_address: user.email_address, password: user.password }
+      end
+
+      it "募集の詳細が表示される" do
+        get recruitment_path(recruitment)
+
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include("募集タイトル")
+        expect(response.body).to include("募集本文")
+      end
+
+      it "投稿者以外のユーザーが編集ボタンを表示されない" do
+        get recruitment_path(recruitment)
+
+        expect(response.body).not_to include("編集")
+      end
+
+      it "投稿者以外のユーザーが削除ボタンを表示されない" do
+        get recruitment_path(recruitment)
+
+        expect(response.body).not_to include("削除")
+      end
+    end
+  end
 end
