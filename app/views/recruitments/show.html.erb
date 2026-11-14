@@ -1,0 +1,28 @@
+<div class="max-w-2xl mx-auto">
+  <div class="p-6 border rounded-xl">
+    <h1 class="font-bold text-3xl"><%= @recruitment.title %></h1>
+    <p class="mt-1 text-sm text-gray-500">投稿者：<%= @recruitment.user.name %></p>
+
+    <div class="mt-4">
+      <%= simple_format(@recruitment.body) %>
+    </div>
+
+    <div class="mt-4 pt-4 border-t">
+      <p>応募期限：<%= @recruitment.closing_date %></p>
+      <p>募集人数：<%= @recruitment.positions_count %></p>
+      <p>募集基準：<%= @recruitment.required_status %></p>
+      <p>応募状態：<%= @recruitment.accepting_applications ? "募集中" : "募集停止中" %></p>
+    </div>
+
+    <% if authenticated? && @recruitment.owned_by?(Current.user) %>
+      <div class="mt-4 flex gap-2">
+        <%= link_to "編集", "#", class: "px-4 py-2 border rounded-lg" %>
+        <%= link_to "削除", "#", class: "px-4 py-2 border rounded-lg" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mt-6">
+    <%= link_to "一覧に戻る", recruitments_path %>
+  </div>
+</div>

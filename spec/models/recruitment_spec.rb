@@ -104,4 +104,28 @@ RSpec.describe Recruitment, type: :model do
       expect(Recruitment.exists?(recruitment.id)).to be false
     end
   end
+
+  describe "#owned_by?" do
+    let(:user) { create(:user) }
+    let(:other_user) { create(:user) }
+    let(:recruitment) { create(:recruitment, user:) }
+
+    context "投稿者本人の場合" do
+      it "trueを返す" do
+        expect(recruitment.owned_by?(user)).to be true
+      end
+    end
+
+    context "投稿者以外のユーザーの場合" do
+      it "falseを返す" do
+        expect(recruitment.owned_by?(other_user)).to be false
+      end
+    end
+
+    context "ユーザーがnilの場合" do
+      it "falseを返す" do
+        expect(recruitment.owned_by?(nil)).to be false
+      end
+    end
+  end
 end

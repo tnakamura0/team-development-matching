@@ -1,8 +1,12 @@
 class RecruitmentsController < ApplicationController
-  allow_unauthenticated_access only: [ :index ]
+  allow_unauthenticated_access only: [ :index, :show ]
 
   def index
     @recruitments = Recruitment.order(created_at: :desc)
+  end
+
+  def show
+    @recruitment = Recruitment.find(params[:id])
   end
 
   def new
@@ -13,7 +17,7 @@ class RecruitmentsController < ApplicationController
     @recruitment = Current.user.recruitments.new(recruitment_params)
 
     if @recruitment.save
-      redirect_to recruitment_path(@recruitment),notice: "募集を作成しました"
+      redirect_to recruitment_path(@recruitment), notice: "募集を作成しました"
     else
       render :new, status: :unprocessable_content
     end
@@ -22,7 +26,8 @@ class RecruitmentsController < ApplicationController
   private
 
   def recruitment_params
-    params.require(:recruitment).permit(:title,:body,:closing_date,:positions_count,:required_status)
+    params.require(:recruitment).permit(
+      :title, :body, :closing_date, :positions_count, :required_status
+    )
   end
-
 end

@@ -7,27 +7,29 @@
 <% end %>
 
 <%= form_with model: @recruitment do |f| %>
-  <div>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
+  <div class="space-y-5">
+    <div>
+      <%= f.label :title, "募集タイトル", class: "block mb-2 font-medium" %>
+      <%= f.text_field :title, class: "w-full border rounded-lg p-2" %>
+    </div>
+    <div>
+      <%= f.label :body , "募集内容", class: "block mb-2 font-medium"%>
+      <%= f.text_area :body, class: "w-full border rounded-lg p-2" %>
+    </div>
+    <div>
+      <%= f.label :closing_date , "締切日", class: "block mb-2 font-medium"%>
+      <%= f.date_field :closing_date, class: "w-full border rounded-lg p-2" %>
+    </div>
+    <div>
+      <%= f.label :positions_count , "募集人数", class: "block mb-2 font-medium"%>
+      <%= f.number_field :positions_count, class: "w-full border rounded-lg p-2" %>
+    </div>
+    <div>
+      <%= f.label :required_status , "応募者の状態", class: "block mb-2 font-medium"%>
+      <%= f.select :required_status, Recruitment.required_statuses.keys, {}, class: "w-full border rounded-lg p-2" %>
+    </div>
   </div>
-  <div>
-    <%= f.label :body %>
-    <%= f.text_area :body %>
-  </div>
-  <div>
-    <%= f.label :closing_date %>
-    <%= f.date_field :closing_date %>
-  </div>
-  <div>
-    <%= f.label :positions_count %>
-    <%= f.number_field :positions_count %>
-  </div>
-  <div>
-    <%= f.label :required_status %>
-    <%= f.select :required_status, Recruitment.required_statuses.keys %>
-  </div>
-  <div>
-    <%= f.submit "募集を作成" %>
+  <div class="mt-6">
+    <%= f.submit "募集を作成", class: "px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 cursor-pointer" %>
   </div>
 <% end %>
