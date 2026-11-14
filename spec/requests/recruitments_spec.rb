@@ -55,7 +55,7 @@ RSpec.describe "Recruitments", type: :request do
           }.not_to change(Recruitment, :count)
 
           expect(response).to have_http_status(:unprocessable_content)
-          expect(response.body).to include("タイトルが未入力です")
+          expect(response.body).to include("Title can't be blank")
         end
       end
       context "他のユーザーのIDが指定された場合" do
