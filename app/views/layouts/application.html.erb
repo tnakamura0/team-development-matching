@@ -24,6 +24,15 @@
   </head>
 
   <body>
+    <header class="border-b border-neutral-border">
+      <div class="max-w-xl mx-auto px-4 py-4 flex items-center justify-between">
+        <% if authenticated? %>
+          <%= link_to "募集を作成",new_recruitment_path,class: "text-on-surface-variant hover:text-primary" %>
+        <% else %>
+          <%= link_to "ログイン",new_session_path,class: "px-5 py-2 rounded-lg border border-primary text-primary" %>
+        <% end %>
+      </div>
+    </header>
     <main class="container mx-auto mt-28 px-5 flex">
       <div class="mx-auto md:w-2/3 w-full">
         <% if alert = flash[:alert] %>
