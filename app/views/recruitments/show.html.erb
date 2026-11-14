@@ -16,8 +16,8 @@
 
     <% if authenticated? && @recruitment.owned_by?(Current.user) %>
       <div class="mt-4 flex gap-2">
-        <%= link_to "編集", "#", class: "px-4 py-2 border rounded-lg" %>
-        <%= link_to "削除", "#", class: "px-4 py-2 border rounded-lg" %>
+        <%= link_to "編集", edit_recruitment_path(@recruitment), class: "px-4 py-2 border rounded-lg" %>
+        <%= button_to "削除", recruitment_path(@recruitment), method: :delete, form: { data: { turbo_confirm: "本当に削除しますか？" } }, class: "px-4 py-2 border rounded-lg" %>
       </div>
     <% end %>
   </div>
