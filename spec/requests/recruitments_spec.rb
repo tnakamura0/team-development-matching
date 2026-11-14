@@ -177,6 +177,10 @@ RSpec.describe "Recruitments", type: :request do
       it "現在のタイトルがフォームに表示される" do
         expect(response.body).to include("編集前のタイトル")
       end
+
+      it "募集を更新ボタンが表示される" do
+        expect(response.body).to include("募集を更新")
+      end
     end
 
     context "投稿者が他人の場合" do
@@ -234,6 +238,19 @@ RSpec.describe "Recruitments", type: :request do
 
         it "422になる" do
           expect(response).to have_http_status(:unprocessable_content)
+        end
+
+        it "エラーメッセージが表示される" do
+          expect(CGI.unescapeHTML(response.body)).to include("Title can't be blank")
+        end
+      end
+
+      context "他のユーザーのIDが指定された場合" do
+        let(:another_user) { create(:user) }
+
+        it "投稿者が変わらない" do
+          patch recruitment_path(own_recruitment), params: { recruitment: { user_id: another_user.id } }
+          expect(own_recruitment.reload.user).to eq(owner)
         end
       end
     end
