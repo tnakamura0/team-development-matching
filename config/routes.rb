@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # パスワード再設定はスコープ外のため無効化。要件が決まったら有効化。
   # resources :passwords, param: :token
   resource :sign_up, only: [ :show, :create ]
-  resources :recruitments, only: [ :index, :show ]
+  resources :recruitments, only: [ :index, :show, :new, :create ]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
