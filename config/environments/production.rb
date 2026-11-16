@@ -80,7 +80,7 @@ Rails.application.configure do
 
   # Enable DNS rebinding protection and other `Host` header attacks.
   config.hosts = [
-    "https://team-development-matching-production.up.railway.app/",
+    "team-development-matching-production.up.railway.app",
     "healthcheck.railway.app"
   ]
   #
