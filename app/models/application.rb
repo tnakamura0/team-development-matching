@@ -9,8 +9,8 @@ class Application < ApplicationRecord
   }
 
   validates :user_id, uniqueness: { scope: :recruitment_id }
-  validates :cannot_apply_to_own_recruitment
-  validates :recruitment_must_be_open
+  validate :cannot_apply_to_own_recruitment
+  validate :recruitment_must_be_open
 
   private
 
