@@ -1,1 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+2:wght@400;500;600;700&display=swap");
+
 @import "tailwindcss";
+
+@theme {
+  /* フォント */
+  --font-mplus: "M PLUS 2", sans-serif;
+
+  /* プライマリーカラー */
+  --color-primary: var(--color-amber-600);
+  --color-primary-hover: var(--color-amber-700);
+  --color-primary-soft: var(--color-amber-50);
+  --color-primary-soft-hover: var(--color-amber-100);
+
+  /* 背景色 */
+  --color-background: oklch(99% 0.003 220);
+  --color-surface: oklch(99.3% 0.002 220);
+  --color-surface-hover: oklch(97% 0.006 220);
+
+  /* 枠の色 */
+  --color-border: oklch(89% 0.008 220);
+
+  /* テキストカラー */
+  --color-text-primary: oklch(38% 0.012 220);
+  --color-text-secondary: oklch(50% 0.01 220);
+  --color-text-muted: oklch(68% 0.01 220);
+  --color-text-inverse: oklch(98% 0 220);
+  --color-text-inverse-hover: oklch(99% 0 220);
+
+  /* セマンティックカラー */
+  --color-success: var(--color-green-600);
+  --color-success-soft: var(--color-green-50);
+  --color-danger: var(--color-red-700);
+  --color-danger-hover: var(--color-red-100);
+  --color-danger-soft: var(--color-red-50);
+}
+
+/* 見出し */
+@utility page-title {
+  @apply text-2xl sm:text-3xl font-bold tracking-wider
+}
+
+/* プライマリーボタン */
+/* 画面内で一番重要な操作に対して使用する。基本的に1画面に1つのみ */
+@utility btn-primary {
+  @apply px-4 py-2 text-center rounded-lg bg-primary font-semibold text-text-inverse transition-colors duration-200 cursor-pointer;
+
+  &:hover {
+    @apply bg-primary-hover text-text-inverse-hover;
+  }
+}
+
+/* セカンダリーボタン */
+/* プライマリーボタンより控えめなデザイン。補助的操作などに使用する（例：キャンセルボタン） */
+@utility btn-secondary {
+  @apply px-4 py-2 text-center rounded-lg border border-primary font-semibold bg-primary-soft text-primary transition-colors duration-200 cursor-pointer;
+
+  &:hover {
+    @apply border-primary-hover bg-primary-soft-hover text-primary-hover;
+  }
+}
+
+/* リンク表示用 */
+@utility link {
+  @apply border-b border-dashed;
+
+  &:hover {
+    @apply text-primary
+  }
+}
+
+/* フォームデザイン */
+
+/* フォーム要素を内包するカードデザイン */
+@utility form-card {
+  @apply lg:w-4/5 mx-auto p-8 border border-border rounded-2xl bg-surface;
+}
+
+/* 個別の入力フォームに付与するラベル */
+@utility label {
+  @apply block mb-2 font-medium;
+}
+
+/* 個別の入力フォーム */
+@utility form-control {
+  @apply w-full px-4 py-2 border border-border rounded-xl transition-colors;
+
+  &:hover {
+    @apply border-primary;
+  }
+
+  &:focus-visible {
+    @apply border-primary outline-none ring-2 ring-primary/20;
+  }
+}
+
+/* セレクトボックス用 */
+@utility select {
+  @apply w-full rounded-xl border border-border bg-surface px-3 py-2 transition-colors;
+
+  &:hover {
+    @apply border-primary;
+  }
+
+  &:focus-visible {
+    @apply outline-none border-primary ring-2 ring-primary/20;
+  }
+}
