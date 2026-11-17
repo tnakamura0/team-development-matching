@@ -178,8 +178,8 @@ RSpec.describe "Recruitments", type: :request do
         expect(response.body).to include("編集前のタイトル")
       end
 
-      it "募集を更新ボタンが表示される" do
-        expect(response.body).to include("募集を更新")
+      it "更新ボタンが表示される" do
+        expect(response.body).to include("更新する")
       end
     end
 
