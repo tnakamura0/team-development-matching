@@ -56,4 +56,13 @@ RSpec.describe Application, type: :model do
       end
     end
   end
+  describe "eunm" do
+    it "statusが定義されている" do
+      expect(Application.statuses).to eq(
+        "pending" => "pending",
+        "approved" => "approved",
+        "rejected" => "rejected"
+      )
+    end
+  end
 end
