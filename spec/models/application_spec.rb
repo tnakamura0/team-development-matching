@@ -52,7 +52,7 @@ RSpec.describe Application, type: :model do
 
       it "無効である" do
         expect(application).to be_invalid
-        expect(application.errors[:user]).to be_present
+        expect(application.errors[:base]).to include("募集作成者のため応募できません")
       end
     end
   end

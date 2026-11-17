@@ -16,7 +16,7 @@ class Application < ApplicationRecord
 
   def cannot_apply_to_own_recruitment
     if user_id == recruitment&.user_id
-      errors.add(:user, "は募集作成者のため応募できません")
+      errors.add(:base, "募集作成者のため応募できません")
     end
   end
 
