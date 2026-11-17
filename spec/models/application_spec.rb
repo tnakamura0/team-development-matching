@@ -55,6 +55,20 @@ RSpec.describe Application, type: :model do
         expect(application.errors[:base]).to include("募集作成者のため応募できません")
       end
     end
+
+    context "応募締切日がすぎた場合" do
+      let!(:existing_application) do
+        create(:application, recruitment: recruitment)
+      end
+      before do
+        recruitment.update!(closing_date: Date.current - 1.day)
+      end
+
+      it "既存の応募ステータスは更新できる" do
+        existing_application.status = "approved"
+        expect(existing_application).to be_valid
+      end
+    end
   end
   describe "eunm" do
     it "statusが定義されている" do
