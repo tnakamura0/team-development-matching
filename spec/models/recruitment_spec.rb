@@ -168,20 +168,39 @@ RSpec.describe Recruitment, type: :model do
   end
 
   describe "#remaining_positions_count(募集人数: positions_countが3の場合)" do
+    let(:recruitment) { create(:recruitment, positions_count: 3) }
+
     context "応募なしの場合" do
-      it "3件になる" 
+      it "3人になる" do
+        expect(recruitment.remaining_positions_count).to eq(3)
+      end
     end
 
-    context "approvedが2件の場合" do
-      it "1件になる" 
+    context "approvedが2人の場合" do
+      before { 2.times { create(:application, recruitment:, status: "approved") } }
+
+      it "1人になる" do
+        expect(recruitment.remaining_positions_count).to eq(1)
+      end
     end
 
-    context "approvedが3件の場合" do
-      it "0件になる" 
+    context "approvedが3人の場合" do
+      before { 3.times { create(:application, recruitment:, status: "approved") } }
+
+      it "0人になる" do
+        expect(recruitment.remaining_positions_count).to eq(0)
+      end
     end
 
-    context "approved3件のあとに募集者がpositions_countを1に減らした場合" do
-      it "0件になる" 
+    context "approved3人のあとに募集者がpositions_countを1に減らした場合" do
+      before do
+        3.times { create(:application, recruitment:, status: "approved") }
+        recruitment.update!(positions_count: 1)
+      end
+
+      it "0人になる" do
+        expect(recruitment.remaining_positions_count).to eq(0)
+      end
     end
   end
 end
