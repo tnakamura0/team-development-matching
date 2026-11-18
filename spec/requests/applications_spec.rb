@@ -107,11 +107,13 @@ RSpec.describe "Applications", type: :request do
         before do
           create(:application, recruitment:, user: other_user, status: "pending")
           create(:application, recruitment:, user: create(:user, name: "承認花子"), status: "approved")
+          create(:application, recruitment:, user: create(:user, name: "見送り次郎"), status: "rejected")
         end
 
         it "応募者の名前と承認状況が表示される" do
           expect(body).to include("応募太郎：未承認")
           expect(body).to include("承認花子：承認済み")
+          expect(body).to include("見送り次郎：見送り")
         end
       end
     end
@@ -139,6 +141,26 @@ RSpec.describe "Applications", type: :request do
         it "応募ボタンの代わりに押せない応募済みボタンが表示される" do
           expect(body).to include("応募済み")
           expect(body).not_to include(apply_form_path)
+        end
+
+        it "自分の応募の承認状況が未承認と表示される" do
+          expect(body).to include("承認状況: 未承認")
+        end
+      end
+
+      context "自分の応募が承認済みの場合" do
+        before { create(:application, recruitment:, user: other_user, status: "approved") }
+
+        it "承認状況が承認済みと表示される" do
+          expect(body).to include("承認状況: 承認済み")
+        end
+      end
+
+      context "自分の応募が見送りの場合" do
+        before { create(:application, recruitment:, user: other_user, status: "rejected") }
+
+        it "承認状況が見送りと表示される" do
+          expect(body).to include("承認状況: 見送り")
         end
       end
     end
