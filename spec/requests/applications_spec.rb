@@ -76,28 +76,16 @@ RSpec.describe "Applications", type: :request do
       end
     end
 
-    context "応募がない場合" do
-      it "専用の文言が表示される" do
-        expect(body).to include("現在、応募はありません")
-      end
-    end
-
-    context "応募がある場合" do
-      before do
-        create(:application, recruitment:, user: other_user, status: "pending")
-        create(:application, recruitment:, user: create(:user, name: "承認花子"), status: "approved")
-      end
-
-      it "応募者の名前と承認状況が表示される" do
-        expect(body).to include("応募太郎：未承認")
-        expect(body).to include("承認花子：承認済み")
-      end
-    end
-
     context "未ログインの場合" do
+      before { create(:application, recruitment:, user: other_user) }
+
       it "応募ボタンは押せず、ログインを促す文言が表示される" do
         expect(body).to include("応募するには")
         expect(body).not_to include(apply_form_path)
+      end
+
+      it "応募者一覧が表示されない" do
+        expect(body).not_to include("応募太郎")
       end
     end
 
@@ -108,6 +96,24 @@ RSpec.describe "Applications", type: :request do
         expect(body).not_to include(apply_form_path)
         expect(body).not_to include("応募済み")
       end
+
+      context "応募がない場合" do
+        it "専用の文言が表示される" do
+          expect(body).to include("現在、応募はありません")
+        end
+      end
+
+      context "応募がある場合" do
+        before do
+          create(:application, recruitment:, user: other_user, status: "pending")
+          create(:application, recruitment:, user: create(:user, name: "承認花子"), status: "approved")
+        end
+
+        it "応募者の名前と承認状況が表示される" do
+          expect(body).to include("応募太郎：未承認")
+          expect(body).to include("承認花子：承認済み")
+        end
+      end
     end
 
     context "募集者以外でログインしている場合" do
@@ -116,6 +122,15 @@ RSpec.describe "Applications", type: :request do
       it "確認ダイアログ付きの応募ボタンが表示される" do
         expect(body).to include(apply_form_path)
         expect(body).to include("この募集に応募しますか？")
+      end
+
+      context "他のユーザーの応募がある場合" do
+        before { create(:application, recruitment:, user: create(:user, name: "承認花子")) }
+
+        it "応募者一覧が表示されない" do
+          expect(body).not_to include("承認花子")
+          expect(body).not_to include("現在、応募はありません")
+        end
       end
 
       context "応募済みの場合" do
