@@ -8,6 +8,8 @@ class RecruitmentsController < ApplicationController
 
   def show
     @recruitment = Recruitment.find(params[:id])
+    @applications = @recruitment.applications.includes(:user).order(:created_at)
+    @my_application = @applications.find { |a| a.user_id == Current.user.id } if authenticated?
   end
 
   def new

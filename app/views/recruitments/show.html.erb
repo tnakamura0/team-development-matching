@@ -14,6 +14,36 @@
       <p>応募状態：<%= @recruitment.accepting_applications ? "募集中" : "募集停止中" %></p>
     </div>
 
+    <div class="mt-4 pt-4 border-t">
+      <p><%= @recruitment.approved_applications_count %> / <%= @recruitment.positions_count %>人(残り<%= @recruitment.remaining_positions_count %>名)</p>
+
+      <% if !authenticated? %>
+        <button type="button" disabled class="mt-2 px-4 py-2 border rounded-lg opacity-50">応募する</button>
+        <p class="mt-1 text-sm text-gray-500">応募するには<%= link_to "ログイン", new_session_path, class: "underline" %>してください</p>
+      <% elsif @recruitment.owned_by?(Current.user) %>
+        <%# 募集者には応募ボタンは表示しない %>
+      <% elsif @my_application %>
+        <button type="button" disabled class="mt-2 px-4 py-2 border rounded-lg opacity-50">応募済み</button>
+      <% else %>
+        <%= button_to "応募する", recruitment_applications_path(@recruitment),
+          form: { data: { turbo_confirm: "この募集に応募しますか？" } },
+          class: "mt-2 px-4 py-2 border rounded-lg" %>
+      <% end %>
+    </div>
+
+    <div class="mt-4 pt-4 border-t">
+      <h2 class="font-bold">応募者</h2>
+      <% if @applications.empty? %>
+        <p>現在、応募はありません</p>
+      <% else %>
+        <ul>
+          <% @applications.each do |application| %>
+            <li><%= application.user.name %>：<%= application.approved? ? "承認済み" : "未承認" %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+
     <% if authenticated? && @recruitment.owned_by?(Current.user) %>
       <div class="mt-4 flex gap-2">
         <%= link_to "編集", edit_recruitment_path(@recruitment), class: "px-4 py-2 border rounded-lg" %>
