@@ -103,6 +103,15 @@ RSpec.describe Recruitment, type: :model do
 
       expect(Recruitment.exists?(recruitment.id)).to be false
     end
+
+    it "募集を削除すると関連する応募も削除される" do
+      recruitment = create(:recruitment)
+      application = create(:application, recruitment:)
+
+      recruitment.destroy!
+
+      expect(Application.exists?(application.id)).to be false
+    end
   end
 
   describe "#owned_by?" do

@@ -90,4 +90,15 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe "アソシエーション" do
+    it "ユーザーを削除するとそのユーザーの応募も削除される" do
+      user = create(:user)
+      application = create(:application, user:)
+
+      user.destroy!
+
+      expect(Application.exists?(application.id)).to be false
+    end
+  end
 end
