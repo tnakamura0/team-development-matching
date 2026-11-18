@@ -23,6 +23,6 @@ class Recruitment < ApplicationRecord
   end
 
   def remaining_positions_count
-    [positions_count - approved_applications_count, 0].max
+    [ positions_count - approved_applications_count, 0 ].max
   end
 end
