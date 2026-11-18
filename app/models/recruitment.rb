@@ -1,5 +1,6 @@
 class Recruitment < ApplicationRecord
   belongs_to :user
+  has_many :applications, dependent: :destroy
 
   enum :required_status,
     {
@@ -15,5 +16,9 @@ class Recruitment < ApplicationRecord
 
   def owned_by?(user)
     user.present? && user_id == user.id
+  end
+
+  def approved_applications_count
+    applications.approved.count
   end
 end
