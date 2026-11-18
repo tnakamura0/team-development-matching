@@ -128,4 +128,60 @@ RSpec.describe Recruitment, type: :model do
       end
     end
   end
+
+  describe "#approved_applications_count(承認済数)" do
+    let(:recruitment) { create(:recruitment) }
+    let(:other_recruitment) { create(:recruitment) }
+
+    context "応募なしの場合" do
+      it "0件になる" do
+        expect(recruitment.approved_applications_count).to eq(0)
+      end
+    end
+
+    context "status: pendingやrejectedのみの場合" do
+      before do
+        create(:application, recruitment:, status: "pending")
+        create(:application, recruitment:, status: "rejected")
+      end
+
+      it "0件になる" do
+        expect(recruitment.approved_applications_count).to eq(0)
+      end
+    end
+
+    context "approvedが2件の場合" do
+      before { 2.times { create(:application, recruitment:, status: "approved") } }
+
+      it "2件になる" do
+        expect(recruitment.approved_applications_count).to eq(2)
+      end
+    end
+
+    context "別の募集のapprovedが1件の場合" do
+      before { create(:application, recruitment: other_recruitment, status: "approved") }
+
+      it "0件になる" do
+        expect(recruitment.approved_applications_count).to eq(0)
+      end
+    end
+  end
+
+  describe "#remaining_positions_count(募集人数: positions_countが3の場合)" do
+    context "応募なしの場合" do
+      it "3件になる" 
+    end
+
+    context "approvedが2件の場合" do
+      it "1件になる" 
+    end
+
+    context "approvedが3件の場合" do
+      it "0件になる" 
+    end
+
+    context "approved3件のあとに募集者がpositions_countを1に減らした場合" do
+      it "0件になる" 
+    end
+  end
 end
