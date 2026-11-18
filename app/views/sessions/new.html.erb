@@ -1,26 +1,31 @@
-<h1 class="font-bold text-4xl">ログイン</h1>
+<div class="form-card">
+  <h1 class="page-title text-center">ログイン</h1>
 
-<%= form_with url: session_url, class: "contents" do |form| %>
-  <div class="my-5">
-    <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "メールアドレス", value: params[:email_address], class: "block shadow-sm rounded-md border border-gray-400 focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "パスワード", maxlength: 72, class: "block shadow-sm rounded-md border border-gray-400 focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="flex flex-col gap-3">
-    <div class="inline">
-      <%= form.submit "ログインする", class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+  <%= form_with url: session_url, class: "space-y-5 text-text-secondary" do |form| %>
+    <div>
+      <%= form.label :email_address, "メールアドレス", class: "label" %>
+      <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", value: params[:email_address], class: "form-control" %>
     </div>
 
-    <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-      <%= link_to "新規登録はこちら", sign_up_path, class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+    <div>
+      <%= form.label :password, "パスワード", class: "label" %>
+      <%= form.password_field :password, required: true, autocomplete: "current-password", maxlength: 72, class: "form-control" %>
     </div>
 
-    <%# パスワード再設定はスコープ外のため非表示。要件が決まったら有効化 %>
-    <%# <div class="mt-4 text-sm text-gray-500 sm:mt-0"> %>
-      <%# link_to "Forgot password?", new_password_path, class: "text-gray-700 underline hover:no-underline" %>
-      <%# </div> %>
-  </div>
-<% end %>
+    <div>
+      <%= form.submit "ログインする", class: "w-full btn-primary" %>
+
+      <%# パスワード再設定はスコープ外のため非表示。要件が決まったら有効化 %>
+      <%# <div class="mt-4 text-sm text-gray-500 sm:mt-0"> %>
+        <%# link_to "Forgot password?", new_password_path, class: "text-gray-700 underline hover:no-underline" %>
+        <%# </div> %>
+    </div>
+
+    <p class="text-center">
+      <span class="text-text-muted">
+        アカウントをお持ちでない方は
+      </span>
+      <%= link_to "新規登録", sign_up_path, class: "link" %>
+    </p>
+  <% end %>
+</div>
