@@ -103,6 +103,15 @@ RSpec.describe Recruitment, type: :model do
 
       expect(Recruitment.exists?(recruitment.id)).to be false
     end
+
+    it "募集を削除すると関連する応募も削除される" do
+      recruitment = create(:recruitment)
+      application = create(:application, recruitment:)
+
+      recruitment.destroy!
+
+      expect(Application.exists?(application.id)).to be false
+    end
   end
 
   describe "#owned_by?" do
@@ -125,6 +134,81 @@ RSpec.describe Recruitment, type: :model do
     context "ユーザーがnilの場合" do
       it "falseを返す" do
         expect(recruitment.owned_by?(nil)).to be false
+      end
+    end
+  end
+
+  describe "#approved_applications_count(承認済数)" do
+    let(:recruitment) { create(:recruitment) }
+    let(:other_recruitment) { create(:recruitment) }
+
+    context "応募なしの場合" do
+      it "0件になる" do
+        expect(recruitment.approved_applications_count).to eq(0)
+      end
+    end
+
+    context "status: pendingやrejectedのみの場合" do
+      before do
+        create(:application, recruitment:, status: "pending")
+        create(:application, recruitment:, status: "rejected")
+      end
+
+      it "0件になる" do
+        expect(recruitment.approved_applications_count).to eq(0)
+      end
+    end
+
+    context "approvedが2件の場合" do
+      before { 2.times { create(:application, recruitment:, status: "approved") } }
+
+      it "2件になる" do
+        expect(recruitment.approved_applications_count).to eq(2)
+      end
+    end
+
+    context "別の募集のapprovedが1件の場合" do
+      before { create(:application, recruitment: other_recruitment, status: "approved") }
+
+      it "0件になる" do
+        expect(recruitment.approved_applications_count).to eq(0)
+      end
+    end
+  end
+
+  describe "#remaining_positions_count(募集人数: positions_countが3の場合)" do
+    let(:recruitment) { create(:recruitment, positions_count: 3) }
+
+    context "応募なしの場合" do
+      it "3人になる" do
+        expect(recruitment.remaining_positions_count).to eq(3)
+      end
+    end
+
+    context "approvedが2人の場合" do
+      before { 2.times { create(:application, recruitment:, status: "approved") } }
+
+      it "1人になる" do
+        expect(recruitment.remaining_positions_count).to eq(1)
+      end
+    end
+
+    context "approvedが3人の場合" do
+      before { 3.times { create(:application, recruitment:, status: "approved") } }
+
+      it "0人になる" do
+        expect(recruitment.remaining_positions_count).to eq(0)
+      end
+    end
+
+    context "approved3人のあとに募集者がpositions_countを1に減らした場合" do
+      before do
+        3.times { create(:application, recruitment:, status: "approved") }
+        recruitment.update!(positions_count: 1)
+      end
+
+      it "0人になる" do
+        expect(recruitment.remaining_positions_count).to eq(0)
       end
     end
   end

@@ -8,6 +8,13 @@ class RecruitmentsController < ApplicationController
 
   def show
     @recruitment = Recruitment.find(params[:id])
+    return unless authenticated?
+
+    if @recruitment.owned_by?(Current.user)
+      @applications = @recruitment.applications.includes(:user).order(:created_at)
+    else
+      @my_application = @recruitment.applications.find_by(user: Current.user)
+    end
   end
 
   def new
