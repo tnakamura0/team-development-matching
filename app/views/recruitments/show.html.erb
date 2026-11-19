@@ -24,7 +24,7 @@
         <%# 募集者には応募ボタンは表示しない %>
       <% elsif @my_application %>
         <button type="button" disabled class="mt-2 px-4 py-2 border rounded-lg opacity-50">応募済み</button>
-        <p class="mt-1 text-sm text-gray-500">承認状況: <%= application_status_label(@my_application) %></p>
+        <p class="mt-1 text-sm text-gray-500">承認状況: <%= @my_application.status %></p>
       <% else %>
         <%= button_to "応募する", recruitment_applications_path(@recruitment),
           form: { data: { turbo_confirm: "この募集に応募しますか？" } },
@@ -40,7 +40,7 @@
         <% else %>
           <ul>
             <% @applications.each do |application| %>
-              <li><%= application.user.name %>：<%= application_status_label(application) %></li>
+              <li><%= application.user.name %>：<%= application.status %></li>
             <% end %>
           </ul>
         <% end %>
