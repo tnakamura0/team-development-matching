@@ -89,5 +89,34 @@ RSpec.describe User, type: :model do
         end
       end
     end
+
+    describe "期" do
+      context "空の場合" do
+        before { user.period = nil }
+
+        it "無効である" do
+          expect(user).to be_invalid
+          expect(user.errors[:period]).to be_present
+        end
+      end
+
+      context "1未満の場合" do
+        before { user.period = 0 }
+
+        it "無効である" do
+          expect(user).to be_invalid
+          expect(user.errors[:period]).to be_present
+        end
+      end
+
+      context "1000より大きい場合" do
+        before { user.period = 1001 }
+
+        it "無効である" do
+          expect(user).to be_invalid
+          expect(user.errors[:period]).to be_present
+        end
+      end
+    end
   end
 end

@@ -50,6 +50,16 @@ RSpec.describe "SignUps", type: :request do
         }.not_to change(User, :count)
       end
     end
+    context "期が空白の場合" do
+      let(:invalid_params) do
+        { user: attributes_for(:user, period: "") }
+      end
+      it "アカウントが作成できない" do
+        expect {
+          post sign_up_path, params: invalid_params
+        }.not_to change(User, :count)
+      end
+    end
     context "メールアドレスが既に存在する場合" do
       let(:invalid_params) do
         { user: attributes_for(:user, email_address: user.email_address) }
