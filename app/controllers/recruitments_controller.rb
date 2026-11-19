@@ -3,7 +3,7 @@ class RecruitmentsController < ApplicationController
   before_action :set_own_recruitment, only: [ :edit, :update, :destroy ]
 
   def index
-    @recruitments = Recruitment.order(created_at: :desc)
+    @recruitments = Recruitment.includes([ :user ]).order(created_at: :desc)
   end
 
   def show
