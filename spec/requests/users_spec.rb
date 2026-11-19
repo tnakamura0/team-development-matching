@@ -28,12 +28,32 @@ RSpec.describe "Users", type: :request do
         get root_path
         expect(response.body).to include(user_path(user))
       end
+
+      it "ヘッダーに自分のユーザー名と期が表示される" do
+        get root_path
+        expect(response.body).to include("テスト太郎 75期")
+      end
+
+      it "自分のマイページにはメールアドレスが表示される" do
+        get user_path(user)
+        expect(response.body).to include(user.email_address)
+      end
+
+      it "他のユーザーのマイページにはメールアドレスが表示されない" do
+        get user_path(other_user)
+        expect(response.body).not_to include(other_user.email_address)
+      end
     end
 
     context "未ログインの場合" do
-      it "ログイン画面にリダイレクトされる" do
+      it "マイページを閲覧できる" do
         get user_path(user)
-        expect(response).to redirect_to(login_path)
+        expect(response).to have_http_status(:ok)
+      end
+
+      it "他のユーザーのメールアドレスは表示されない" do
+        get user_path(other_user)
+        expect(response.body).not_to include(other_user.email_address)
       end
     end
 
@@ -43,9 +63,8 @@ RSpec.describe "Users", type: :request do
       end
 
       it "404エラーが返る" do
-        expect {
-          get user_path(id: 9999)
-        }.to raise_error(ActiveRecord::RecordNotFound)
+        get user_path(id: 9999)
+        expect(response).to have_http_status(:not_found)
       end
     end
   end
