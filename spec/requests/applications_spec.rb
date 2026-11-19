@@ -111,9 +111,9 @@ RSpec.describe "Applications", type: :request do
         end
 
         it "応募者の名前と承認状況が表示される" do
-          expect(body).to include("応募太郎：未承認")
-          expect(body).to include("承認花子：承認済み")
-          expect(body).to include("見送り次郎：見送り")
+          expect(body).to include("応募太郎：pending")
+          expect(body).to include("承認花子：approved")
+          expect(body).to include("見送り次郎：rejected")
         end
       end
     end
@@ -143,24 +143,24 @@ RSpec.describe "Applications", type: :request do
           expect(body).not_to include(apply_form_path)
         end
 
-        it "自分の応募の承認状況が未承認と表示される" do
-          expect(body).to include("承認状況: 未承認")
+        it "自分の応募の承認状況がpendingと表示される" do
+          expect(body).to include("承認状況: pending")
         end
       end
 
-      context "自分の応募が承認済みの場合" do
+      context "自分の応募がapprovedの場合" do
         before { create(:application, recruitment:, user: other_user, status: "approved") }
 
-        it "承認状況が承認済みと表示される" do
-          expect(body).to include("承認状況: 承認済み")
+        it "承認状況がapprovedと表示される" do
+          expect(body).to include("承認状況: approved")
         end
       end
 
-      context "自分の応募が見送りの場合" do
+      context "自分の応募がrejectedの場合" do
         before { create(:application, recruitment:, user: other_user, status: "rejected") }
 
-        it "承認状況が見送りと表示される" do
-          expect(body).to include("承認状況: 見送り")
+        it "承認状況がrejectedと表示される" do
+          expect(body).to include("承認状況: rejected")
         end
       end
     end
