@@ -24,14 +24,9 @@ RSpec.describe "Users", type: :request do
         expect(response).to have_http_status(:ok)
       end
 
-      it "ヘッダーからマイページにアクセスできる" do
+      it "ヘッダーに自分のマイページへのリンクが表示される" do
         get root_path
-        expect(response.body).to include(user_path(user))
-      end
-
-      it "ヘッダーに自分のユーザー名と期が表示される" do
-        get root_path
-        expect(response.body).to include("テスト太郎 75期")
+        expect(response.body).to include(%(href="#{user_path(user)}">マイページ</a>))
       end
 
       it "自分のマイページにはメールアドレスが表示される" do
