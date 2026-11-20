@@ -70,6 +70,59 @@ RSpec.describe Application, type: :model do
       end
     end
   end
+  describe "#approve" do
+    let(:recruitment) { create(:recruitment, positions_count: 1) }
+    let(:application) { create(:application, recruitment:) }
+
+    context "承認待ちで残り枠がある場合" do
+      it "approvedになりtrueを返す" do
+        expect(application.approve).to be true
+        expect(application.reload.status).to eq("approved")
+      end
+    end
+
+    context "残り枠が0の場合" do
+      before { create(:application, recruitment:, status: "approved") }
+
+      it "approvedにならずエラーが追加される" do
+        expect(application.approve).to be false
+        expect(application.reload.status).to eq("pending")
+        expect(application.errors[:base]).to include("残り枠がないため承認できません")
+      end
+    end
+
+    context "承認待ち以外の場合" do
+      before { application.update!(status: "rejected") }
+
+      it "状態が変わらずエラーが追加される" do
+        expect(application.approve).to be false
+        expect(application.reload.status).to eq("rejected")
+        expect(application.errors[:base]).to include("この応募はすでに処理済みです")
+      end
+    end
+  end
+
+  describe "#reject" do
+    let(:application) { create(:application) }
+
+    context "承認待ちの場合" do
+      it "rejectedになりtrueを返す" do
+        expect(application.reject).to be true
+        expect(application.reload.status).to eq("rejected")
+      end
+    end
+
+    context "承認待ち以外の場合" do
+      before { application.update!(status: "approved") }
+
+      it "状態が変わらずエラーが追加される" do
+        expect(application.reject).to be false
+        expect(application.reload.status).to eq("approved")
+        expect(application.errors[:base]).to include("この応募はすでに処理済みです")
+      end
+    end
+  end
+
   describe "eunm" do
     it "statusが定義されている" do
       expect(Application.statuses).to eq(
