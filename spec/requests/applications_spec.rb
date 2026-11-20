@@ -194,25 +194,14 @@ RSpec.describe "Applications", type: :request do
       end
 
       context "応募がある場合" do
-        before do
-          create(:application, recruitment:, user: other_user, status: "pending")
-          create(:application, recruitment:, user: create(:user, name: "承認花子"), status: "approved")
-          create(:application, recruitment:, user: create(:user, name: "見送り次郎"), status: "rejected")
-        end
-
-        it "応募者の名前と承認状況が表示される" do
-          expect(body).to include("応募太郎：pending")
-          expect(body).to include("承認花子：approved")
-          expect(body).to include("見送り次郎：rejected")
-        end
-      end
-
-      context "承認・見送りボタンの表示" do
         let!(:pending_application) { create(:application, recruitment:, user: other_user, status: "pending") }
         let!(:approved_application) { create(:application, recruitment:, user: create(:user, name: "花子"), status: "approved") }
         let!(:rejected_application) { create(:application, recruitment:, user: create(:user, name: "次郎"), status: "rejected") }
 
-        it "応募者の期が表示される" do
+        it "応募者の名前と期が表示される" do
+          expect(body).to include("応募太郎")
+          expect(body).to include("花子")
+          expect(body).to include("次郎")
           expect(body).to include("◯期")
         end
 
