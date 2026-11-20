@@ -18,6 +18,6 @@ class SignUpsController < ApplicationController
 
   private
     def sign_up_params
-      params.expect(user: [ :name, :period, :email_address, :password, :password_confirmation ])
+      params.expect(user: [ :name, :period, :required_status, :email_address, :password, :password_confirmation ])
     end
 end
