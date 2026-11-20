@@ -14,6 +14,7 @@ if Rails.env.development?
     user.name = "テスト太郎"
     user.period = 75
     user.password = "password"
+    user.required_status = "basic_step_completed"
   end
 
   # 開発環境用募集データ
