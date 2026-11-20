@@ -57,6 +57,96 @@ RSpec.describe "Applications", type: :request do
     end
   end
 
+  describe "PATCH /recruitments/:recruitment_id/applications/:id/approve" do
+    subject(:approve) { patch approve_recruitment_application_path(recruitment, application) }
+
+    let!(:application) { create(:application, recruitment:, user: other_user) }
+
+    context "未ログインの場合" do
+      it "状態は変わらず、ログイン画面にリダイレクトされる" do
+        approve
+        expect(application.reload.status).to eq("pending")
+        expect(response).to redirect_to(new_session_path)
+      end
+    end
+
+    context "募集者本人の場合" do
+      before { log_in(owner) }
+
+      it "approvedになり、完了メッセージが表示される" do
+        approve
+        expect(application.reload.status).to eq("approved")
+        expect(response).to redirect_to(recruitment_path(recruitment))
+
+        follow_redirect!
+        expect(response.body).to include("承認しました")
+      end
+
+      context "残り枠が0の場合" do
+        before do
+          recruitment.update!(positions_count: 1)
+          create(:application, recruitment:, status: "approved")
+        end
+
+        it "承認されず、エラーメッセージが表示される" do
+          approve
+          expect(application.reload.status).to eq("pending")
+          expect(response).to redirect_to(recruitment_path(recruitment))
+
+          follow_redirect!
+          expect(response.body).to include("残り枠がないため承認できません")
+        end
+      end
+    end
+
+    context "募集者以外の場合" do
+      before { log_in(create(:user)) }
+
+      it "状態は変わらず、404になる" do
+        approve
+        expect(application.reload.status).to eq("pending")
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+  end
+
+  describe "PATCH /recruitments/:recruitment_id/applications/:id/reject" do
+    subject(:reject) { patch reject_recruitment_application_path(recruitment, application) }
+
+    let!(:application) { create(:application, recruitment:, user: other_user) }
+
+    context "未ログインの場合" do
+      it "状態は変わらず、ログイン画面にリダイレクトされる" do
+        reject
+        expect(application.reload.status).to eq("pending")
+        expect(response).to redirect_to(new_session_path)
+      end
+    end
+
+    context "募集者本人の場合" do
+      before { log_in(owner) }
+
+      it "rejectedになり、完了メッセージが表示される" do
+        reject
+        expect(application.reload.status).to eq("rejected")
+        expect(response).to redirect_to(recruitment_path(recruitment))
+
+        follow_redirect!
+        expect(response.body).to include("見送りました")
+      end
+    end
+
+    context "募集者以外の場合" do
+      before { log_in(create(:user)) }
+
+      it "状態は変わらず、404になる" do
+        reject
+        expect(application.reload.status).to eq("pending")
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+  end
+
   describe "GET /recruitments/:id（応募の表示）" do
     subject(:body) do
       get recruitment_path(recruitment)
@@ -104,16 +194,38 @@ RSpec.describe "Applications", type: :request do
       end
 
       context "応募がある場合" do
-        before do
-          create(:application, recruitment:, user: other_user, status: "pending")
-          create(:application, recruitment:, user: create(:user, name: "承認花子"), status: "approved")
-          create(:application, recruitment:, user: create(:user, name: "見送り次郎"), status: "rejected")
+        let!(:pending_application) { create(:application, recruitment:, user: other_user, status: "pending") }
+        let!(:approved_application) { create(:application, recruitment:, user: create(:user, name: "花子"), status: "approved") }
+        let!(:rejected_application) { create(:application, recruitment:, user: create(:user, name: "次郎"), status: "rejected") }
+
+        it "応募者の名前と期が表示される" do
+          expect(body).to include("応募太郎")
+          expect(body).to include("花子")
+          expect(body).to include("次郎")
+          expect(body).to include("◯期")
         end
 
-        it "応募者の名前と承認状況が表示される" do
-          expect(body).to include("応募太郎：pending")
-          expect(body).to include("承認花子：approved")
-          expect(body).to include("見送り次郎：rejected")
+        it "承認待ちの応募者に確認ダイアログ付きの承認、見送りボタンが表示される" do
+          expect(body).to include(approve_recruitment_application_path(recruitment, pending_application))
+          expect(body).to include(reject_recruitment_application_path(recruitment, pending_application))
+          expect(body).to include("応募太郎さんを承認しますか？")
+          expect(body).to include("応募太郎さんを見送りますか？")
+        end
+
+        it "承認済み、見送り済みの応募者にはボタンの代わりに状態が表示される" do
+          expect(body).not_to include(approve_recruitment_application_path(recruitment, approved_application))
+          expect(body).not_to include(reject_recruitment_application_path(recruitment, rejected_application))
+          expect(body).to include("承認済み")
+          expect(body).to include("見送り済み")
+        end
+
+        context "残り枠が0の場合" do
+          before { recruitment.update!(positions_count: 1) }
+
+          it "承認ボタンは無効になり、見送りボタンは表示される" do
+            expect(body).not_to include(approve_recruitment_application_path(recruitment, pending_application))
+            expect(body).to include(reject_recruitment_application_path(recruitment, pending_application))
+          end
         end
       end
     end

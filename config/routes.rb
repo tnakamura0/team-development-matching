@@ -8,7 +8,12 @@ Rails.application.routes.draw do
   # resources :passwords, param: :token
   resource :sign_up, only: [ :show, :create ]
   resources :recruitments, only: [ :index, :show, :new, :create, :edit, :update, :destroy ] do
-    resources :applications, only: [ :create ]
+    resources :applications, only: [ :create ] do
+      member do
+        patch :approve
+        patch :reject
+      end
+    end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

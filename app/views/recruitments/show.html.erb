@@ -38,9 +38,37 @@
         <% if @applications.empty? %>
           <p>現在、応募はありません</p>
         <% else %>
-          <ul>
+          <% no_positions_left = @recruitment.remaining_positions_count.zero? %>
+          <ul class="mt-2 divide-y">
             <% @applications.each do |application| %>
-              <li><%= application.user.name %>：<%= application.status %></li>
+              <li class="flex items-center justify-between gap-2 py-2">
+                <div>
+                  <span class="font-medium"><%= application.user.name %></span>
+                  <%# 期データは未実装のため仮表示 %>
+                  <span class="ml-2 text-sm text-gray-500">◯期</span>
+                </div>
+
+                <div class="flex items-center gap-2">
+                  <% if application.pending? %>
+                    <% if no_positions_left %>
+                      <button type="button" disabled class="px-4 py-2 text-sm rounded-lg bg-orange-600 text-white opacity-50">承認</button>
+                    <% else %>
+                      <%= button_to "承認", approve_recruitment_application_path(@recruitment, application),
+                        method: :patch,
+                        form: { data: { turbo_confirm: "#{application.user.name}さんを承認しますか？" } },
+                        class: "px-4 py-2 text-sm rounded-lg bg-orange-600 text-white hover:bg-orange-700 cursor-pointer transition-colors" %>
+                    <% end %>
+                    <%= button_to "見送り", reject_recruitment_application_path(@recruitment, application),
+                      method: :patch,
+                      form: { data: { turbo_confirm: "#{application.user.name}さんを見送りますか？" } },
+                      class: "px-4 py-2 text-sm rounded-lg border border-orange-600 text-orange-600 hover:bg-orange-50 cursor-pointer transition-colors" %>
+                  <% elsif application.approved? %>
+                    <span class="text-sm text-gray-500">承認済み</span>
+                  <% else %>
+                    <span class="text-sm text-gray-500">見送り済み</span>
+                  <% end %>
+                </div>
+              </li>
             <% end %>
           </ul>
         <% end %>
