@@ -10,24 +10,29 @@
   <%= form_with model: recruitment do |f| %>
     <div class="space-y-5">
       <div>
-        <%= f.label :title, "募集タイトル", class: "label" %>
+        <%= f.label :title, class: "label" %>
         <%= f.text_field :title, class: "form-control" %>
       </div>
       <div>
-        <%= f.label :body , "募集内容", class: "label" %>
+        <%= f.label :body, class: "label" %>
         <%= f.text_area :body, class: "form-control min-h-28 resize-y" %>
       </div>
       <div>
-        <%= f.label :closing_date , "締切日", class: "label" %>
+        <%= f.label :closing_date, class: "label" %>
         <%= f.date_field :closing_date, class: "form-control" %>
       </div>
       <div>
-        <%= f.label :positions_count , "募集人数", class: "label" %>
+        <%= f.label :positions_count, class: "label" %>
         <%= f.number_field :positions_count, class: "form-control" %>
       </div>
       <div>
-        <%= f.label :required_status , "応募者の状態", class: "label" %>
-        <%= f.select :required_status, Recruitment.required_statuses.keys, {}, class: "select" %>
+        <%= f.label :required_status, class: "label" %>
+        <%= f.select :required_status,
+          Recruitment.required_statuses.keys.map { |key|
+            [I18n.t("enums.recruitment.required_status.#{key}"), key]
+          },
+          {},
+          class: "select" %>
       </div>
     </div>
     <div class="mt-8">
