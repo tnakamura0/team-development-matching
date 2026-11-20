@@ -100,5 +100,16 @@ RSpec.describe "SignUps", type: :request do
         }.not_to change(User, :count)
       end
     end
+
+    context "学習ステータスが空白の場合" do
+      let(:invalid_params) do
+        { user: attributes_for(:user, required_status: "") }
+      end
+      it "アカウントが作成できない" do
+        expect {
+          post sign_up_path, params: invalid_params
+        }.not_to change(User, :count)
+      end
+    end
   end
 end

@@ -38,6 +38,11 @@ RSpec.describe "Users", type: :request do
         get user_path(other_user)
         expect(response.body).not_to include(other_user.email_address)
       end
+
+      it "学習ステータスが表示される" do
+        get user_path(user)
+        expect(response.body).to include("基礎STEP完了")
+      end
     end
 
     context "未ログインの場合" do
@@ -49,6 +54,11 @@ RSpec.describe "Users", type: :request do
       it "他のユーザーのメールアドレスは表示されない" do
         get user_path(other_user)
         expect(response.body).not_to include(other_user.email_address)
+      end
+
+      it "学習ステータスが表示される" do
+        get user_path(user)
+        expect(response.body).to include("基礎STEP完了")
       end
     end
 
