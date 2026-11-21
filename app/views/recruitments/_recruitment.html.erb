@@ -14,7 +14,7 @@
 
       <%# 募集基準 %>
       <div class="flex items-center justify-center gap-0.5">
-        <p><%= recruitment.required_status %></p>
+        <p><%= I18n.t("enums.recruitment.required_status.#{recruitment.required_status}") %></p>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="m11.99 7.5 3.75-3.75m0 0 3.75 3.75m-3.75-3.75v16.499H4.49" />
         </svg>
