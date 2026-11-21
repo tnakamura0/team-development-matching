@@ -1,25 +1,43 @@
-<header class="fixed inset-x-0 top-0 z-50 bg-white border-b border-gray-300 shadow-sm">
+<header class="fixed inset-x-0 top-0 z-50 bg-surface border-b border-border shadow-sm"
+        data-controller="hamburger">
   <div class="max-w-6xl mx-auto px-8 h-16 flex items-center justify-between">
-    <%= link_to "TeamUp!", root_path, class: "text-2xl font-bold text-orange-600 hover:text-orange-800" %>
+    <%= link_to "TeamUp!", root_path, class: "text-2xl font-bold text-primary hover:text-primary-hover" %>
 
-    <nav class="flex items-center gap-4 text-sm font-medium">
-      <% if authenticated? %>
-        <%= link_to "+募集を作成", new_recruitment_path,
-          class: "px-4 py-2 rounded-lg bg-orange-600 text-white hover:bg-orange-700 transition-colors" %>
-        <%= link_to "マイページ", "#", class: "text-gray-700 hover:text-orange-600 transition-colors" %>
-        <%= link_to "#", class: "p-2 rounded-full text-gray-700 hover:text-orange-600 transition-colors", aria: { label: "通知" } do %>
+    <% if authenticated? %>
+      <%# PC用ナビ %>
+      <nav class="hidden md:flex items-center gap-4 text-sm font-medium">
+        <%= link_to "+募集を作成", new_recruitment_path, class: "btn-primary" %>
+        <%= link_to "マイページ", "#", class: "text-text-secondary hover:text-primary transition-colors" %>
+        <%= link_to "#", class: "p-2 rounded-full text-text-secondary hover:text-primary transition-colors", aria: { label: "通知" } do %>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" >
             <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
           </svg>
         <% end %>
         <%= button_to "ログアウト", session_path, method: :delete,
-              class: "text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" %>
-      <% else %>
-        <%= link_to "ログイン", new_session_path,
-              class: "px-4 py-2 rounded-lg border border-orange-600 text-orange-600 hover:bg-orange-50 transition-colors" %>
-        <%= link_to "新規登録", sign_up_path,
-              class: "px-4 py-2 rounded-lg bg-orange-600 text-white hover:bg-orange-700 transition-colors" %>
-      <% end %>
-    </nav>
+              class: "text-text-muted hover:text-text-secondary cursor-pointer transition-colors" %>
+      </nav>
+
+      <%# スマホ用ハンバーガーボタン %>
+      <button type="button" data-action="hamburger#toggle" aria-label="メニュー"
+              class="md:hidden p-2 text-2xl text-text-secondary hover:text-primary cursor-pointer">≡</button>
+    <% else %>
+      <nav class="flex items-center gap-4 text-sm font-medium">
+        <%= link_to "ログイン", new_session_path, class: "btn-secondary" %>
+        <%= link_to "新規登録", sign_up_path, class: "btn-primary" %>
+      </nav>
+    <% end %>
   </div>
+
+  <%# スマホ用メニュー（ヘッダーの下に伸びる） %>
+  <% if authenticated? %>
+    <div data-hamburger-target="menu" class="hidden md:hidden border-t border-border">
+      <nav class="flex flex-col gap-1 px-8 py-4 text-sm font-medium">
+        <%= link_to "+募集を作成", new_recruitment_path, class: "btn-primary" %>
+        <%= link_to "マイページ", "#", class: "px-4 py-2 rounded-lg text-text-secondary hover:text-primary" %>
+        <%= link_to "通知", "#", class: "px-4 py-2 rounded-lg text-text-secondary hover:text-primary" %>
+        <%= button_to "ログアウト", session_path, method: :delete,
+              class: "w-full text-left px-4 py-2 rounded-lg text-text-muted hover:text-text-secondary cursor-pointer" %>
+      </nav>
+    </div>
+  <% end %>
 </header>
