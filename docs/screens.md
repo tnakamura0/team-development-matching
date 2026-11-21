@@ -9,6 +9,7 @@
 | S-4 | 応募作成・編集 | `/recruits/new`ほか | 必要 | UC-5 |
 | S-5 | 応募詳細 | `/recruits/:id` | 不要 | UC-1, UC-2, UC-4 |
 | S-6 | 通知一覧 | `/notifications` | 必要 | UC-6 |
+| S-7 | マイページ | `/users/:id` | 不要 | UC-3 |
 
 ## 画面遷移図
 
@@ -24,6 +25,7 @@ flowchart TD
         D["S-4<br>応募作成"]
         E["S-5<br>応募詳細"]
         F["S-6<br>通知一覧"]
+        G["S-7<br>マイページ"]
     end
 
     A -->|ログイン成功| C
@@ -32,7 +34,9 @@ flowchart TD
     C <--> D
     C <--> E
     C <--> F
+    C <--> G
     D --> |作成完了| E
     D <--> F
     E <--> F
+    E <--> G
 ```
