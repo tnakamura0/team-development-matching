@@ -18,7 +18,7 @@ class RecruitmentsController < ApplicationController
     @recruitment = Current.user.recruitments.new(recruitment_params)
 
     if @recruitment.save
-      redirect_to recruitment_path(@recruitment), notice: "募集を作成しました"
+      redirect_to recruitment_path(@recruitment), notice: t(".success")
     else
       render :new, status: :unprocessable_content
     end
@@ -29,7 +29,7 @@ class RecruitmentsController < ApplicationController
 
   def update
     if @recruitment.update(recruitment_params)
-      redirect_to recruitment_path(@recruitment), notice: "募集を更新しました"
+      redirect_to recruitment_path(@recruitment), notice: t(".success")
     else
       render :edit, status: :unprocessable_content
     end
@@ -37,7 +37,7 @@ class RecruitmentsController < ApplicationController
 
   def destroy
     @recruitment.destroy!
-    redirect_to recruitments_path, notice: "募集を削除しました", status: :see_other
+    redirect_to recruitments_path, notice: t(".success"), status: :see_other
   end
 
   private
