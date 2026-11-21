@@ -70,6 +70,26 @@
   }
 }
 
+/* 募集中バッジ */
+@utility recruitment-open {
+  @apply text-sm text-primary bg-primary-soft border border-primary rounded-xl px-3 py-0.5;
+}
+
+/* 募集終了バッジ */
+@utility recruitment-close {
+  @apply text-sm text-text-muted border border-text-muted rounded-xl px-3 py-0.5;
+}
+
+/* カードデザイン */
+@utility card {
+  @apply border border-border bg-surface rounded-xl;
+}
+
+/* 承認状況カード */
+@utility approve-status-card {
+  @apply p-4 flex gap-3 border rounded-xl;
+}
+
 /* フォームデザイン */
 
 /* フォーム要素を内包するカードデザイン */
