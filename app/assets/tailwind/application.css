@@ -16,6 +16,7 @@
   --color-background: oklch(99% 0.003 220);
   --color-surface: oklch(99.3% 0.002 220);
   --color-surface-hover: oklch(97% 0.006 220);
+  --color-done: oklch(92% 0.003 220);
 
   /* 枠の色 */
   --color-border: oklch(89% 0.008 220);
