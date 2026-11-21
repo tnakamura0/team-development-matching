@@ -17,4 +17,10 @@ export default class extends Controller {
     this.menuTarget.classList.add("hidden")
     this.buttonTarget.setAttribute("aria-expanded", "false")
   }
+
+  closeOnClickOutside(event) {
+    if (!this.element.contains(event.target)) {
+      this.close()
+    }
+  }
 }
