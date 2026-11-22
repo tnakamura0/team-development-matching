@@ -63,7 +63,7 @@ RSpec.describe "Recruitments", type: :request do
           }.not_to change(Recruitment, :count)
 
           expect(response).to have_http_status(:unprocessable_content)
-          expect(CGI.unescapeHTML(response.body)).to include("Title can't be blank")
+          expect(CGI.unescapeHTML(response.body)).to include("募集タイトル を入力してください")
         end
       end
 
@@ -241,7 +241,7 @@ RSpec.describe "Recruitments", type: :request do
         end
 
         it "エラーメッセージが表示される" do
-          expect(CGI.unescapeHTML(response.body)).to include("Title can't be blank")
+          expect(CGI.unescapeHTML(response.body)).to include("募集タイトル を入力してください")
         end
       end
 

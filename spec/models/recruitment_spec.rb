@@ -51,7 +51,7 @@ RSpec.describe Recruitment, type: :model do
 
         it "無効である" do
           expect(recruitment).to be_invalid
-          expect(recruitment.errors[:positions_count]).to eq([ "must be an integer" ])
+          expect(recruitment.errors[:positions_count]).to eq([ "整数で入力してください" ])
         end
       end
     end
@@ -61,7 +61,7 @@ RSpec.describe Recruitment, type: :model do
 
       it "無効である" do
         expect(recruitment).to be_invalid
-        expect(recruitment.errors[:positions_count]).to eq([ "must be greater than 0" ])
+        expect(recruitment.errors[:positions_count]).to eq([ "は0より大きい値にしてください" ])
       end
     end
 

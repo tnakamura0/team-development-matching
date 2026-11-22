@@ -1,19 +1,19 @@
 <div class="form-card">
-  <h1 class="page-title text-center">ログイン</h1>
+  <h1 class="page-title text-center"><%= t(".title") %></h1>
 
   <%= form_with url: session_url, class: "space-y-5 text-text-secondary" do |form| %>
     <div>
-      <%= form.label :email_address, "メールアドレス", class: "label" %>
+      <%= form.label :email_address, User.human_attribute_name(:email_address), class: "label" %>
       <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", value: params[:email_address], class: "form-control" %>
     </div>
 
     <div>
-      <%= form.label :password, "パスワード", class: "label" %>
+      <%= form.label :password, User.human_attribute_name(:password), class: "label" %>
       <%= form.password_field :password, required: true, autocomplete: "current-password", maxlength: 72, class: "form-control" %>
     </div>
 
     <div>
-      <%= form.submit "ログインする", class: "w-full btn-primary" %>
+      <%= form.submit t(".submit"), class: "w-full btn-primary" %>
 
       <%# パスワード再設定はスコープ外のため非表示。要件が決まったら有効化 %>
       <%# <div class="mt-4 text-sm text-gray-500 sm:mt-0"> %>
@@ -23,9 +23,9 @@
 
     <p class="text-center">
       <span class="text-text-muted">
-        アカウントをお持ちでない方は
+        <%= t(".sign_up_message") %>
       </span>
-      <%= link_to "新規登録", sign_up_path, class: "link" %>
+      <%= link_to t(".sign_up"), sign_up_path, class: "link" %>
     </p>
   <% end %>
 </div>
