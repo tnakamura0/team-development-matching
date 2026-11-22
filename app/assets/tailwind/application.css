@@ -16,6 +16,7 @@
   --color-background: oklch(99% 0.003 220);
   --color-surface: oklch(99.3% 0.002 220);
   --color-surface-hover: oklch(97% 0.006 220);
+  --color-done: oklch(92% 0.003 220);
 
   /* 枠の色 */
   --color-border: oklch(89% 0.008 220);
@@ -67,6 +68,26 @@
   &:hover {
     @apply text-primary
   }
+}
+
+/* 募集中バッジ */
+@utility recruitment-open {
+  @apply text-sm text-primary bg-primary-soft border border-primary rounded-xl px-3 py-0.5;
+}
+
+/* 募集終了バッジ */
+@utility recruitment-close {
+  @apply text-sm text-text-muted border border-text-muted rounded-xl px-3 py-0.5;
+}
+
+/* カードデザイン */
+@utility card {
+  @apply border border-border bg-surface rounded-xl;
+}
+
+/* 承認状況カード */
+@utility approve-status-card {
+  @apply p-4 flex gap-3 border rounded-xl;
 }
 
 /* フォームデザイン */

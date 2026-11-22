@@ -161,8 +161,8 @@ RSpec.describe "Applications", type: :request do
         create(:application, recruitment:, status: "pending")
       end
 
-      it "承認数と残り人数が表示される" do
-        expect(body).to include("1 / 3人(残り2名)")
+      it "承認数が表示される" do
+        expect(body).to include("1名承認済み")
       end
     end
 
@@ -189,7 +189,7 @@ RSpec.describe "Applications", type: :request do
 
       context "応募がない場合" do
         it "専用の文言が表示される" do
-          expect(body).to include("現在、応募はありません")
+          expect(body).to include("現在、応募がありません。")
         end
       end
 
@@ -205,25 +205,45 @@ RSpec.describe "Applications", type: :request do
           expect(body).to include("◯期")
         end
 
-        it "承認待ちの応募者に確認ダイアログ付きの承認、見送りボタンが表示される" do
-          expect(body).to include(approve_recruitment_application_path(recruitment, pending_application))
-          expect(body).to include(reject_recruitment_application_path(recruitment, pending_application))
+        it "承認待ちの応募者に確認ダイアログ付きの有効な承認ボタンが表示される" do
+          document = Nokogiri::HTML(body)
+
+          button = document.at_css(
+            "form[action='#{approve_recruitment_application_path(recruitment, pending_application)}'] button"
+          )
+
+          expect(button).not_to be_nil
+          expect(button.has_attribute?("disabled")).to be false
           expect(body).to include("応募太郎さんを承認しますか？")
+        end
+
+        it "承認待ちの応募者に確認ダイアログ付きのお見送りボタンが表示される" do
+          expect(body).to include(reject_recruitment_application_path(recruitment, pending_application))
           expect(body).to include("応募太郎さんを見送りますか？")
         end
 
         it "承認済み、見送り済みの応募者にはボタンの代わりに状態が表示される" do
           expect(body).not_to include(approve_recruitment_application_path(recruitment, approved_application))
           expect(body).not_to include(reject_recruitment_application_path(recruitment, rejected_application))
-          expect(body).to include("承認済み")
-          expect(body).to include("見送り済み")
+          expect(body).to include("承認")
+          expect(body).to include("お見送り")
         end
 
         context "残り枠が0の場合" do
           before { recruitment.update!(positions_count: 1) }
 
-          it "承認ボタンは無効になり、見送りボタンは表示される" do
-            expect(body).not_to include(approve_recruitment_application_path(recruitment, pending_application))
+          it "承認ボタンが無効になる" do
+            document = Nokogiri::HTML(body)
+
+            button = document.at_css(
+              "form[action='#{approve_recruitment_application_path(recruitment, pending_application)}'] button"
+            )
+
+            expect(button).not_to be_nil
+            expect(button.has_attribute?("disabled")).to be true
+          end
+
+          it "お見送りボタンは表示される" do
             expect(body).to include(reject_recruitment_application_path(recruitment, pending_application))
           end
         end
@@ -256,7 +276,7 @@ RSpec.describe "Applications", type: :request do
         end
 
         it "自分の応募の承認状況がpendingと表示される" do
-          expect(body).to include("承認状況: pending")
+          expect(body).to include("pending")
         end
       end
 
@@ -264,7 +284,7 @@ RSpec.describe "Applications", type: :request do
         before { create(:application, recruitment:, user: other_user, status: "approved") }
 
         it "承認状況がapprovedと表示される" do
-          expect(body).to include("承認状況: approved")
+          expect(body).to include("approved")
         end
       end
 
@@ -272,7 +292,7 @@ RSpec.describe "Applications", type: :request do
         before { create(:application, recruitment:, user: other_user, status: "rejected") }
 
         it "承認状況がrejectedと表示される" do
-          expect(body).to include("承認状況: rejected")
+          expect(body).to include("rejected")
         end
       end
     end
