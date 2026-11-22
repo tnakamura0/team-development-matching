@@ -1,0 +1,53 @@
+ja:
+  shared:
+    header:
+      create_recruitment: "+募集を作成"
+      mypage: "マイページ"
+      logout: "ログアウト"
+      login: "ログイン"
+      sign_up: "新規登録"
+      notifications: "通知"
+
+  recruitments:
+    recruitment:
+      accepting: "募集中"
+      closed: "募集終了"
+      closing_date: "募集締切日"
+      positions_count: "募集人数"
+      people_count: "%{count}名"
+    edit:
+      submit: "更新する"
+    index:
+      title: "仲間を探す"
+      sub_title: "気になる募集から、チーム開発の第一歩を。"
+      empty_message: "現在募集がありません"
+    new:
+      submit: "作成する"
+    show:
+      author: "投稿者："
+      closing_date: "応募期限："
+      positions_count: "募集人数："
+      people_count: "%{count}名"
+      required_status: "募集基準："
+      application_status: "応募状態："
+      accepting: "募集中"
+      stopped: "募集停止中"
+      edit: "編集"
+      delete: "削除"
+      delete_confirm: "本当に削除しますか？"
+      back_to_index: "一覧に戻る"
+
+  sessions:
+    new:
+      title: "ログイン"
+      submit: "ログインする"
+      sign_up_message: "アカウントをお持ちでない方は"
+      sign_up: "新規登録"
+
+  sign_ups:
+    show:
+      title: "新規登録"
+      password_hint: "8文字以上で入力してください"
+      submit: "登録する"
+      login_message: "アカウントをお持ちの方は"
+      login: "ログイン"

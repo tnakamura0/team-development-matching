@@ -4,20 +4,20 @@
 
     <nav class="flex items-center gap-4 text-sm font-medium">
       <% if authenticated? %>
-        <%= link_to "+募集を作成", new_recruitment_path,
+        <%= link_to t(".create_recruitment"), new_recruitment_path,
           class: "px-4 py-2 rounded-lg bg-orange-600 text-white hover:bg-orange-700 transition-colors" %>
-        <%= link_to "マイページ", "#", class: "text-gray-700 hover:text-orange-600 transition-colors" %>
-        <%= link_to "#", class: "p-2 rounded-full text-gray-700 hover:text-orange-600 transition-colors", aria: { label: "通知" } do %>
+        <%= link_to t(".mypage"), "#", class: "text-gray-700 hover:text-orange-600 transition-colors" %>
+        <%= link_to "#", class: "p-2 rounded-full text-gray-700 hover:text-orange-600 transition-colors", aria: { label: t(".notifications") } do %>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" >
             <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
           </svg>
         <% end %>
-        <%= button_to "ログアウト", session_path, method: :delete,
+        <%= button_to t(".logout"), session_path, method: :delete,
               class: "text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" %>
       <% else %>
-        <%= link_to "ログイン", new_session_path,
+        <%= link_to t(".login"), new_session_path,
               class: "px-4 py-2 rounded-lg border border-orange-600 text-orange-600 hover:bg-orange-50 transition-colors" %>
-        <%= link_to "新規登録", sign_up_path,
+        <%= link_to t(".sign_up"), sign_up_path,
               class: "px-4 py-2 rounded-lg bg-orange-600 text-white hover:bg-orange-700 transition-colors" %>
       <% end %>
     </nav>

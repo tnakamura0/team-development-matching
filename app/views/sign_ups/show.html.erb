@@ -1,5 +1,5 @@
 <div class="form-card">
-  <h1 class="page-title text-center">新規登録</h1>
+  <h1 class="page-title text-center"><%= t(".title") %></h1>
 
   <%= form_with model: @user, url: sign_up_path, class: "space-y-5 text-text-secondary" do |form| %>
     <% if form.object.errors.any? %>
@@ -21,7 +21,7 @@
     <div>
       <%= form.label :password, class: "label" %>
       <%= form.password_field :password, required: true, autocomplete: "new-password", class: "form-control" %>
-      <p class="mt-2 text-text-muted text-sm">8文字以上で入力してください</p>
+      <p class="mt-2 text-text-muted text-sm"><%= t(".password_hint") %></p>
     </div>
 
     <div>
@@ -30,14 +30,14 @@
     </div>
 
     <div>
-      <%= form.submit "登録する", class: "w-full text-center btn-primary" %>
+      <%= form.submit t(".submit"), class: "w-full text-center btn-primary" %>
     </div>
 
     <div class="text-center">
       <span class="text-text-muted">
-        アカウントをお持ちの方は
+        <%= t(".login_message") %>
       </span>
-      <%= link_to "ログイン", new_session_path, class: "link" %>
+      <%= link_to t(".login"), new_session_path, class: "link" %>
     </div>
   <% end %>
 </div>
