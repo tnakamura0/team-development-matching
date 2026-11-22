@@ -28,6 +28,15 @@ RSpec.describe Recruitment, type: :model do
       end
     end
 
+    context "closing_dateが募集作成日以前の場合" do
+      before { recruitment.closing_date = Date.yesterday }
+
+      it "無効である" do
+        expect(recruitment).to be_invalid
+        expect(recruitment.errors[:closing_date]).to be_present
+      end
+    end
+
     context "positions_countが空の場合" do
       before { recruitment.positions_count = nil }
 
