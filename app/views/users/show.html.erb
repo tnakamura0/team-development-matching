@@ -7,6 +7,9 @@
     <p class="mt-2 text-text-secondary"><%= @user.required_status_label %></p>
     <% if authenticated? && @user == Current.user %>
       <p class="mt-2 text-text-secondary"><%= @user.email_address %></p>
+      <div class="mt-4">
+        <%= link_to "プロフィール編集", edit_user_path(@user), class: "btn-secondary" %>
+      </div>
     <% end %>
   </div>
 </div>

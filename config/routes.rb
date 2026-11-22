@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # パスワード再設定はスコープ外のため無効化。要件が決まったら有効化。
   # resources :passwords, param: :token
   resource :sign_up, only: [ :show, :create ]
-  resources :users, only: [ :show ]
+  resources :users, only: [ :show, :edit, :update ]
   resources :recruitments, only: [ :index, :show, :new, :create, :edit, :update, :destroy ] do
     resources :applications, only: [ :create ] do
       member do
