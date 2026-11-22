@@ -1,7 +1,7 @@
 <div class="max-w-2xl mx-auto">
   <div class="p-6 border rounded-xl">
     <h1 class="font-bold text-3xl"><%= @recruitment.title %></h1>
-    <p class="mt-1 text-sm text-gray-500">投稿者：<%= @recruitment.user.name %></p>
+    <p class="mt-1 text-sm text-gray-500">投稿者：<%= link_to @recruitment.user.name, @recruitment.user, class: "underline hover:text-orange-600" %></p>
 
     <div class="mt-4">
       <%= simple_format(@recruitment.body) %>
