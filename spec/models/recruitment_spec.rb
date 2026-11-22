@@ -28,6 +28,15 @@ RSpec.describe Recruitment, type: :model do
       end
     end
 
+    context "closing_dateが募集作成日より前の場合" do
+      before { recruitment.closing_date = Date.yesterday }
+
+      it "無効である" do
+        expect(recruitment).to be_invalid
+        expect(recruitment.errors[:closing_date]).to be_present
+      end
+    end
+
     context "positions_countが空の場合" do
       before { recruitment.positions_count = nil }
 
@@ -51,7 +60,7 @@ RSpec.describe Recruitment, type: :model do
 
         it "無効である" do
           expect(recruitment).to be_invalid
-          expect(recruitment.errors[:positions_count]).to eq([ "must be an integer" ])
+          expect(recruitment.errors[:positions_count]).to eq([ "整数で入力してください" ])
         end
       end
     end
@@ -61,7 +70,7 @@ RSpec.describe Recruitment, type: :model do
 
       it "無効である" do
         expect(recruitment).to be_invalid
-        expect(recruitment.errors[:positions_count]).to eq([ "must be greater than 0" ])
+        expect(recruitment.errors[:positions_count]).to eq([ "は0より大きい値にしてください" ])
       end
     end
 
