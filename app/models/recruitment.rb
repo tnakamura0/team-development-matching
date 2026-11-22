@@ -13,7 +13,8 @@ class Recruitment < ApplicationRecord
   validates :closing_date, presence: true
   validates :closing_date,
     comparison: { greater_than_or_equal_to: -> { Date.current } },
-    if: :will_save_change_to_closing_date?
+    if: :will_save_change_to_closing_date?,
+    allow_blank: true
   validates :positions_count, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates :accepting_applications, inclusion: [ true, false ]
 
