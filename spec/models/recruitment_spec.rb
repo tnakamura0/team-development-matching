@@ -28,7 +28,7 @@ RSpec.describe Recruitment, type: :model do
       end
     end
 
-    context "closing_dateが募集作成日以前の場合" do
+    context "closing_dateが募集作成日より前の場合" do
       before { recruitment.closing_date = Date.yesterday }
 
       it "無効である" do
