@@ -72,6 +72,15 @@
 | created_at | datetime | null: false | 作成日時 |
 | updated_at | datetime | null: false | 更新日時 |
 
+#### applications_status の値（enum）
+
+| 値 | 意味 |
+|---|---|
+| pending | 承認待ち |
+| approved | 承認 |
+| rejected | 却下 |
+
+
 ### notifications
 
 応募後に募集者に届く通知を管理する。

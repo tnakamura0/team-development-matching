@@ -1,13 +1,13 @@
-<div class="border border-border bg-surface hover:bg-surface-hover rounded-xl">
+<div class="card hover:bg-surface-hover">
   <%= link_to recruitment, class: "block p-5" do %>
     <div class="flex justify-between">
       <%# 応募状態バッジ %>
       <% if recruitment.accepting_applications %>
-        <p class="text-sm text-primary bg-primary-soft border border-primary rounded-xl px-3 py-0.5">
+        <p class="recruitment-open">
           募集中
         </p>
       <% else %>
-        <p class="text-sm text-text-muted border border-text-muted rounded-xl px-3 py-0.5">
+        <p class="recruitment-close">
           募集終了
         </p>
       <% end %>
