@@ -7,8 +7,8 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
         </svg>
         <div>
-          <h2 class="font-semibold"><%= @my_application.status %></h2>
-          <p class="mt-2 text-text-primary">募集者が確認中です。</p>
+          <h2 class="font-semibold"><%= t(".application_#{@my_application.status}") %></h2>
+          <p class="mt-2 text-text-primary"><%= t(".pending_description") %></p>
         </div>
       </div>
     <% elsif @my_application.status == "approved" %>
@@ -18,8 +18,8 @@
         </svg>
 
         <div>
-          <h2 class="font-semibold"><%= @my_application.status %></h2>
-          <p class="mt-2 text-text-primary">承認されました。</p>
+          <h2 class="font-semibold"><%= t(".application_#{@my_application.status}") %></h2>
+          <p class="mt-2 text-text-primary"><%= t(".approved_description") %></p>
         </div>
       </div>
     <% else %>
@@ -29,8 +29,8 @@
         </svg>
 
         <div>
-          <h2 class="font-semibold"><%= @my_application.status %></h2>
-          <p class="mt-2 text-text-primary">今回はお見送りとなりました。</p>
+          <h2 class="font-semibold"><%= t(".application_#{@my_application.status}") %></h2>
+          <p class="mt-2 text-text-primary"><%= t(".rejected_description") %></p>
         </div>
       </div>
     <% end %>
@@ -41,11 +41,11 @@
     <div class="flex items-center justify-between">
       <% if @recruitment.accepting_applications %>
         <p class="recruitment-open">
-          募集中
+          <%= t(".accepting") %>
         </p>
       <% else %>
         <p class="recruitment-close">
-          募集停止中
+          <%= t(".stopped") %>
         </p>
       <% end %>
 
@@ -55,13 +55,13 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
               <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
             </svg>
-            <span>編集</span>
+            <span><%= t(".edit") %></span>
           <% end %>
-          <%= button_to recruitment_path(@recruitment), method: :delete, form: { data: { turbo_confirm: "本当に削除しますか？" } }, class: "flex items-center gap-1 px-3 py-1 text-danger border border-danger rounded-lg cursor-pointer" do %>
+          <%= button_to recruitment_path(@recruitment), method: :delete, form: { data: { turbo_confirm: t(".delete_confirm") } }, class: "flex items-center gap-1 px-3 py-1 text-danger border border-danger rounded-lg cursor-pointer" do %>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
               <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
             </svg>
-            <span>削除</span>
+            <span><%= t(".delete") %></span>
           <% end %>
         </div>
       <% end %>
@@ -79,23 +79,23 @@
       <%= simple_format(@recruitment.body) %>
     </div>
 
-    <h2 class="mt-5 font-semibold text-xl">応募条件</h2>
+    <h2 class="mt-5 font-semibold text-xl"><%= t(".application_conditions") %></h2>
 
     <div class="mt-2 grid grid-cols-3 border border-border bg-background rounded-2xl">
       <%# 締切日 %>
       <div class="col-span-1 p-3 border-r border-border">
-        <p class="text-text-secondary">締切日</p>
+        <p class="text-text-secondary"><%= t(".closing_date") %></p>
         <p class="font-semibold"><%= @recruitment.closing_date %></p>
       </div>
 
       <%# 募集人数 %>
       <div class="col-span-1 p-3 border-r border-border">
-        <p class="text-text-secondary">募集人数</p>
+        <p class="text-text-secondary"><%= t(".positions_count") %></p>
         <p class="font-semibold">
-          <%= @recruitment.positions_count %>名
+          <%= t(".people_count", count: @recruitment.positions_count) %>
           <% if @recruitment.positions_count != @recruitment.remaining_positions_count %>
             <span>
-              （<%= @recruitment.approved_applications_count %>名承認済み）
+              <%= t(".approved_count", count: @recruitment.approved_applications_count) %>
             </span>
           <% end %>
         </p>
@@ -103,8 +103,8 @@
 
       <%# 募集基準 %>
       <div class="col-span-1 p-3">
-        <p class="text-text-secondary">募集基準</p>
-        <p class="font-semibold"><%= @recruitment.required_status %></p>
+        <p class="text-text-secondary"><%= t(".required_status") %></p>
+        <p class="font-semibold"><%= t("enums.recruitment.required_status.#{@recruitment.required_status}") %></p>
       </div>
     </div>
 
@@ -112,7 +112,7 @@
       <% if !authenticated? %>
         <div class="p-4 bg-background border border-border rounded-lg space-y-5">
           <p class="text-text-secondary text-center">
-            応募するには<%= link_to "ログイン", new_session_path, class: "link" %>してください。
+            <%= t(".login_to_apply") %><%= link_to t(".login"), new_session_path, class: "link" %><%= t(".login_to_apply_suffix") %>
           </p>
           <button
             type="button"
@@ -121,7 +121,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
             </svg>
-            <span>応募する</span>
+            <span><%= t(".apply") %></span>
           </button>
         </div>
       <% elsif @recruitment.owned_by?(Current.user) %>
@@ -131,12 +131,12 @@
           type="button"
           disabled
           class="cursor-not-allowed px-4 py-2 bg-done rounded-lg w-full">
-          応募済み
+          <%= t(".already_applied") %>
         </button>
       <% else %>
-        <%= button_to "応募する",
+        <%= button_to t(".apply"),
             recruitment_applications_path(@recruitment),
-            form: { data: { turbo_confirm: "この募集に応募しますか？" } },
+            form: { data: { turbo_confirm: t(".application_confirm") } },
             class: "btn-primary w-full" %>
       <% end %>
     </div>
@@ -146,13 +146,13 @@
   <% if authenticated? && @recruitment.owned_by?(Current.user) %>
     <div class="card p-8">
       <div class="flex items-center justify-between">
-        <h2 class="text-xl font-bold">応募者</h2>
+        <h2 class="text-xl font-bold"><%= t(".applicants") %></h2>
         <p>
-          <%= @applications.count %>人
+          <%= t(".applicant_count", count: @applications.count) %>
         </p>
       </div>
       <% if @applications.empty? %>
-        <p class="mt-5">現在、応募がありません。</p>
+        <p class="mt-5"><%= t(".no_applications") %></p>
       <% else %>
         <% no_positions_left = @recruitment.remaining_positions_count.zero? %>
         <ul class="mt-5 divide-y divide-border">
@@ -161,32 +161,32 @@
               <div class="flex items-center gap-2">
                 <span class="font-medium"><%= application.user.name %></span>
                 <%# 期データは未実装のため仮表示 %>
-                <span class="text-sm text-text-secondary">◯期</span>
+                <span class="text-sm text-text-secondary"><%= t(".term_placeholder") %></span>
               </div>
 
               <div class="flex items-center gap-2">
                 <% if application.pending? %>
-                  <%= button_to "承認する",
+                  <%= button_to t(".approve"),
                       approve_recruitment_application_path(@recruitment, application),
                       method: :patch,
-                      form: { data: { turbo_confirm: "#{application.user.name}さんを承認しますか？" } },
+                      form: { data: { turbo_confirm: t(".approve_confirm", name: application.user.name) } },
                       disabled: no_positions_left,
                       class: "btn-primary px-5 py-1 disabled:opacity-50 disabled:cursor-not-allowed" %>
-                  <%= button_to "お見送りする",
+                  <%= button_to t(".reject"),
                       reject_recruitment_application_path(@recruitment, application),
                       method: :patch,
-                      form: { data: { turbo_confirm: "#{application.user.name}さんを見送りますか？" } },
+                      form: { data: { turbo_confirm: t(".reject_confirm", name: application.user.name) } },
                       class: "btn-secondary px-3 py-1" %>
                 <% elsif application.approved? %>
                   <div class="flex items-center gap-1 px-3 py-0.5 text-success bg-success-soft rounded-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
                       <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                     </svg>
-                    <p>承認</p>
+                    <p><%= t(".approved_label") %></p>
                   </div>
                 <% else %>
                   <p class="px-3 py-0.5 text-text-secondary bg-done rounded-lg">
-                    お見送り
+                    <%= t(".rejected_label") %>
                   </p>
                 <% end %>
               </div>
@@ -199,5 +199,5 @@
 </div>
 
 <div class="mt-6">
-  <%= link_to "一覧に戻る", recruitments_path %>
+  <%= link_to t(".back_to_index"), recruitments_path %>
 </div>
