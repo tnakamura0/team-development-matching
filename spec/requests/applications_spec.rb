@@ -275,6 +275,7 @@ RSpec.describe "Applications", type: :request do
           expect(body).not_to include(apply_form_path)
         end
 
+
         it "自分の応募の承認状況が承認待ちと表示される" do
           expect(body).to include("承認待ち")
         end
