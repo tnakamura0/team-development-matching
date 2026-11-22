@@ -293,7 +293,6 @@ RSpec.describe "Applications", type: :request do
 
         it "承認状況がrejectedと表示される" do
           expect(body).to include("お見送り")
-
         end
       end
     end
