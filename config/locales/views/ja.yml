@@ -81,6 +81,7 @@ ja:
 
   users:
     edit:
+      title: "プロフィール編集"
       submit: "更新する"
       back_to_mypage: "マイページに戻る"
     show:
