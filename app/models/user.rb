@@ -11,6 +11,25 @@ class User < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 50 }
 
+  validates :period, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 1000 }
+
   # パスワードを変更しない更新(passwordがnil)では長さチェックしない
   validates :password, length: { minimum: 8 }, allow_nil: true
+
+  enum :required_status,
+    {
+      basic_step_completed: "basic_step_completed",
+      advanced_step_completed: "advanced_step_completed",
+      graduated: "graduated"
+    }, validate: true
+
+  REQUIRED_STATUS_LABELS = {
+    "basic_step_completed" => "基礎STEP完了",
+    "advanced_step_completed" => "応用STEP完了",
+    "graduated" => "卒業済み"
+  }.freeze
+
+  def required_status_label
+    REQUIRED_STATUS_LABELS[required_status]
+  end
 end

@@ -14,6 +14,16 @@
     </div>
 
     <div>
+      <%= form.label :period, "期", class: "label" %>
+      <%= form.number_field :period, required: true, min: 1, max: 1000, step: 1, placeholder: "例: 50", class: "form-control" %>
+    </div>
+
+    <div>
+      <%= form.label :required_status, "学習ステータス", class: "label" %>
+      <%= form.select :required_status, User::REQUIRED_STATUS_LABELS.invert, { prompt: "選択してください" }, required: true, class: "select" %>
+    </div>
+
+    <div>
       <%= form.label :email_address, class: "label" %>
       <%= form.email_field :email_address, required: true, autocomplete: "email", class: "form-control" %>
     </div>

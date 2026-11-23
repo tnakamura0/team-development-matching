@@ -16,6 +16,8 @@
 |---|---|---|---|
 | id | bigint | PK | 主キー |
 | name | string | null: false | ユーザー名 |
+| period | integer | null: false | 期 |
+| required_status | string | null: false | 学習ステータス |
 | email_address | string | null: false, unique: true | メールアドレス |
 | password_digest | string | null: false | ハッシュ化したパスワード |
 | created_at | datetime | null: false | 作成日時 |

@@ -12,7 +12,9 @@ if Rails.env.development?
   # 開発環境用テストアカウント
   user = User.find_or_create_by!(email_address: "test@example.com") do |user|
     user.name = "テスト太郎"
+    user.period = 75
     user.password = "password"
+    user.required_status = "basic_step_completed"
   end
 
   # 開発環境用募集データ

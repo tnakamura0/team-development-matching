@@ -54,6 +54,16 @@ RSpec.describe "SignUps", type: :request do
         expect(response).to have_http_status(:unprocessable_content)
       end
     end
+    context "期が空白の場合" do
+      let(:invalid_params) do
+        { user: attributes_for(:user, period: "") }
+      end
+      it "アカウントが作成できない" do
+        expect {
+          post sign_up_path, params: invalid_params
+        }.not_to change(User, :count)
+      end
+    end
     context "メールアドレスが既に存在する場合" do
       let(:invalid_params) do
         { user: attributes_for(:user, email_address: user.email_address) }
@@ -122,6 +132,17 @@ RSpec.describe "SignUps", type: :request do
       it "ステータス422が返る" do
         post sign_up_path, params: invalid_params
         expect(response).to have_http_status(:unprocessable_content)
+      end
+    end
+
+    context "学習ステータスが空白の場合" do
+      let(:invalid_params) do
+        { user: attributes_for(:user, required_status: "") }
+      end
+      it "アカウントが作成できない" do
+        expect {
+          post sign_up_path, params: invalid_params
+        }.not_to change(User, :count)
       end
     end
   end

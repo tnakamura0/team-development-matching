@@ -7,7 +7,7 @@
       <%# PC用ナビ %>
       <nav class="hidden md:flex items-center gap-4 text-sm font-medium">
         <%= link_to t(".create_recruitment"), new_recruitment_path, class: "btn-primary" %>
-        <%= link_to t(".mypage"), "#", class: "text-text-secondary hover:text-primary transition-colors" %>
+        <%= link_to t(".mypage"), user_path(Current.user), class: "text-text-secondary hover:text-primary transition-colors" %>
 
         <%# TODO: #102 通知機能はMVP対象外のため非表示。実装時にif falseを外す %>
         <% if false %>
@@ -49,7 +49,7 @@
   <% if authenticated? %>
     <div data-hamburger-target="menu" class="hidden md:hidden border-t border-border">
       <nav class="flex flex-col py-2 font-medium">
-        <%= link_to "#", class: "flex items-center gap-3 px-8 py-3 text-text-secondary hover:bg-surface-hover active:bg-surface-hover" do %>
+        <%= link_to user_path(Current.user), class: "flex items-center gap-3 px-8 py-3 text-text-secondary hover:bg-surface-hover active:bg-surface-hover" do %>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
           </svg>
