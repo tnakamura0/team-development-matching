@@ -18,12 +18,14 @@ ja:
       people_count: "%{count}名"
     edit:
       submit: "更新する"
+      back_to_detail: "詳細に戻る"
     index:
       title: "仲間を探す"
       sub_title: "気になる募集から、チーム開発の第一歩を。"
       empty_message: "現在募集がありません"
     new:
       submit: "作成する"
+      back_to_index: "一覧に戻る"
     show:
       closing_date: "締切日"
       positions_count: "募集人数"
