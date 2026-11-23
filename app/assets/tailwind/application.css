@@ -13,13 +13,14 @@
   --color-primary-soft-hover: var(--color-amber-100);
 
   /* 背景色 */
-  --color-background: oklch(99% 0.003 220);
+  --color-background: oklch(97% 0.003 220);
   --color-surface: oklch(99.3% 0.002 220);
   --color-surface-hover: oklch(97% 0.006 220);
   --color-done: oklch(92% 0.003 220);
 
   /* 枠の色 */
   --color-border: oklch(89% 0.008 220);
+  --color-border-hover: oklch(70% 0.01 220);
 
   /* テキストカラー */
   --color-text-primary: oklch(38% 0.012 220);

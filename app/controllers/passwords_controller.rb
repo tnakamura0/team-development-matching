@@ -1,3 +1,4 @@
+# TODO: #103 パスワード再設定はMVP対象外。routes有効化時に使用
 class PasswordsController < ApplicationController
   allow_unauthenticated_access
   before_action :set_user_by_token, only: %i[ edit update ]
