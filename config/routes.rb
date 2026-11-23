@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resource :session
-  # パスワード再設定はスコープ外のため無効化。要件が決まったら有効化。
+  # TODO: #103 パスワード再設定はMVP対象外のため無効化。実装時に有効化する
   # resources :passwords, param: :token
   resource :sign_up, only: [ :show, :create ]
   resources :recruitments, only: [ :index, :show, :new, :create, :edit, :update, :destroy ] do
