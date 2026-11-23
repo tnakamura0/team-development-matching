@@ -1,4 +1,6 @@
 ja:
+  errors:
+    format: "%{attribute}%{message}"
   activerecord:
     attributes:
       user:
@@ -21,7 +23,7 @@ ja:
         too_long: "は%{count}文字以内で入力してください"
         confirmation: "とパスワードの入力が一致しません"
         not_a_number: "は数値で入力してください"
-        not_an_integer: "整数で入力してください"
+        not_an_integer: "は整数で入力してください"
         greater_than: "は%{count}より大きい値にしてください"
   enums:
     recruitment:
