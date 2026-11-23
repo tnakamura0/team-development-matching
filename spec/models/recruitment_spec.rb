@@ -60,7 +60,7 @@ RSpec.describe Recruitment, type: :model do
 
         it "無効である" do
           expect(recruitment).to be_invalid
-          expect(recruitment.errors[:positions_count]).to eq([ "整数で入力してください" ])
+          expect(recruitment.errors[:positions_count]).to eq([ "は整数で入力してください" ])
         end
       end
     end
