@@ -60,13 +60,13 @@ RSpec.describe Application, type: :model do
       let!(:existing_application) do
         create(:application, recruitment: recruitment)
       end
-      before do
-        recruitment.update!(closing_date: Date.current - 1.day)
-      end
 
       it "既存の応募ステータスは更新できる" do
-        existing_application.status = "approved"
-        expect(existing_application).to be_valid
+        travel 1.day do
+          existing_application.update!(status: "approved")
+
+          expect(existing_application.reload.status).to eq("approved")
+        end
       end
     end
   end

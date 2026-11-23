@@ -1,6 +1,6 @@
 <div>
-  <h1 class="page-title">仲間を探す</h1>
-  <p class="mt-2 text-text-secondary">気になる募集から、チーム開発の第一歩を。</p>
+  <h1 class="page-title"><%= t(".title") %></h1>
+  <p class="mt-2 text-text-secondary"><%= t(".sub_title") %></p>
 
   <div class="my-5">
     <% if @recruitments.present? %>
@@ -8,7 +8,7 @@
         <%= render @recruitments %>
       </div>
     <% else %>
-      <p>現在募集がありません</p>
+      <p><%= t(".empty_message") %></p>
     <% end %>
   </div>
 </div>
