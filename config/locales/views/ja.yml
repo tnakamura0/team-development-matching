@@ -72,7 +72,17 @@ ja:
   sign_ups:
     show:
       title: "新規登録"
+      example: "例: 50"
+      prompt: "選択してください"
       password_hint: "8文字以上で入力してください"
       submit: "登録する"
       login_message: "アカウントをお持ちの方は"
       login: "ログイン"
+
+  users:
+    edit:
+      submit: "更新する"
+      back_to_mypage: "マイページに戻る"
+    show:
+      period: "期"
+      profile_edit: "プロフィール編集"

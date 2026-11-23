@@ -8,6 +8,8 @@ ja:
         name: "ユーザー名"
         password: "パスワード"
         password_confirmation: "パスワード（確認）"
+        period: "期"
+        required_status: "学習ステータス"
       recruitment:
         title: "募集タイトル"
         body: "募集内容"
