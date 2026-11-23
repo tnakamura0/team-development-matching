@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  # home関連は共通レイアウト実装時に削除する
-  # 現状は開発中のログアウト実行用として /home に残す
-  get "home", to: "home#index"
-
   resource :session
   # パスワード再設定はスコープ外のため無効化。要件が決まったら有効化。
   # resources :passwords, param: :token
