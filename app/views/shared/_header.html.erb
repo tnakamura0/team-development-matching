@@ -8,10 +8,14 @@
       <nav class="hidden md:flex items-center gap-4 text-sm font-medium">
         <%= link_to t(".create_recruitment"), new_recruitment_path, class: "btn-primary" %>
         <%= link_to t(".mypage"), "#", class: "text-text-secondary hover:text-primary transition-colors" %>
-        <%= link_to "#", class: "p-2 rounded-full text-text-secondary hover:text-primary transition-colors", aria: { label: t(".notifications") } do %>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" >
-            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
-          </svg>
+
+        <%# TODO: #84 通知機能はMVP対象外のため非表示。実装時にif falseを外す %>
+        <% if false %>
+          <%= link_to "#", class: "p-2 rounded-full text-text-secondary hover:text-primary transition-colors", aria: { label: t(".notifications") } do %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+            </svg>
+          <% end %>
         <% end %>
 
         <%= button_to t(".logout"), session_path, method: :delete,
@@ -52,11 +56,14 @@
           <%= t(".mypage") %>
         <% end %>
 
-        <%= link_to "#", class: "flex items-center gap-3 px-8 py-3 text-text-secondary hover:bg-surface-hover active:bg-surface-hover" do %>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
-          </svg>
-          <%= t(".notifications") %>
+        <%# TODO: #84 通知機能はMVP対象外のため非表示。実装時にif falseを外す %>
+        <% if false %>
+          <%= link_to "#", class: "flex items-center gap-3 px-8 py-3 text-text-secondary hover:bg-surface-hover active:bg-surface-hover" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+            </svg>
+            <%= t(".notifications") %>
+          <% end %>
         <% end %>
 
         <hr class="my-2 border-border">
