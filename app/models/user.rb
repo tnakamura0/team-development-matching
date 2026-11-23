@@ -6,9 +6,10 @@ class User < ApplicationRecord
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
-  validates :email_address, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :email_address, presence: true, uniqueness: true, length: { maximum: 255 },
+                            format: { with: URI::MailTo::EMAIL_REGEXP }
 
-  validates :name, presence: true
+  validates :name, presence: true, length: { maximum: 50 }
 
   validates :period, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 1000 }
 

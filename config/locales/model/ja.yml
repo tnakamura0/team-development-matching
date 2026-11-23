@@ -1,0 +1,33 @@
+ja:
+  errors:
+    format: "%{attribute}%{message}"
+  activerecord:
+    attributes:
+      user:
+        email_address: "メールアドレス"
+        name: "ユーザー名"
+        password: "パスワード"
+        password_confirmation: "パスワード（確認）"
+      recruitment:
+        title: "募集タイトル"
+        body: "募集内容"
+        closing_date: "募集締切日"
+        positions_count: "募集人数"
+        required_status: "募集基準"
+    errors:
+      messages:
+        blank: "を入力してください"
+        taken: "はすでに使用されています"
+        invalid: "の形式が正しくありません"
+        too_short: "は%{count}文字以上で入力してください"
+        too_long: "は%{count}文字以内で入力してください"
+        confirmation: "とパスワードの入力が一致しません"
+        not_a_number: "は数値で入力してください"
+        not_an_integer: "は整数で入力してください"
+        greater_than: "は%{count}より大きい値にしてください"
+  enums:
+    recruitment:
+      required_status:
+        basic_step_completed: "基礎STEP完了"
+        advanced_step_completed: "応用STEP完了"
+        graduated: "卒業済み"

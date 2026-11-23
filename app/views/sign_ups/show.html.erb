@@ -1,15 +1,15 @@
 <div class="form-card">
-  <h1 class="page-title text-center">新規登録</h1>
+  <h1 class="page-title text-center"><%= t(".title") %></h1>
 
-  <%= form_with model: @user, url: sign_up_path, class: "space-y-5 text-text-secondary" do |form| %>
+  <%= form_with model: @user, url: sign_up_path, class: "mt-5 space-y-5 text-text-secondary" do |form| %>
     <% if form.object.errors.any? %>
       <div class=" text-danger">
-        Error: <%= form.object.errors.full_messages.first %>
+        <%= form.object.errors.full_messages.first %>
       </div>
     <% end %>
 
     <div>
-      <%= form.label :name, "ユーザー名", class: "label" %>
+      <%= form.label :name, class: "label" %>
       <%= form.text_field :name, required: true, autofocus: true, autocomplete: "name", class: "form-control" %>
     </div>
 
@@ -24,30 +24,30 @@
     </div>
 
     <div>
-      <%= form.label :email_address, "メールアドレス", class: "label" %>
+      <%= form.label :email_address, class: "label" %>
       <%= form.email_field :email_address, required: true, autocomplete: "email", class: "form-control" %>
     </div>
 
     <div>
-      <%= form.label :password, "パスワード", class: "label" %>
+      <%= form.label :password, class: "label" %>
       <%= form.password_field :password, required: true, autocomplete: "new-password", class: "form-control" %>
-      <p class="mt-2 text-text-muted text-sm">8文字以上で入力してください</p>
+      <p class="mt-2 text-text-muted text-sm"><%= t(".password_hint") %></p>
     </div>
 
     <div>
-      <%= form.label :password_confirmation, "パスワード（確認）", class: "label" %>
+      <%= form.label :password_confirmation, class: "label" %>
       <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password", class: "form-control" %>
     </div>
 
     <div>
-      <%= form.submit "登録する", class: "w-full text-center btn-primary" %>
+      <%= form.submit t(".submit"), class: "w-full text-center btn-primary" %>
     </div>
 
     <div class="text-center">
       <span class="text-text-muted">
-        アカウントをお持ちの方は
+        <%= t(".login_message") %>
       </span>
-      <%= link_to "ログイン", new_session_path, class: "link" %>
+      <%= link_to t(".login"), new_session_path, class: "link" %>
     </div>
   <% end %>
 </div>

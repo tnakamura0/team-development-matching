@@ -63,7 +63,7 @@ RSpec.describe "Recruitments", type: :request do
           }.not_to change(Recruitment, :count)
 
           expect(response).to have_http_status(:unprocessable_content)
-          expect(CGI.unescapeHTML(response.body)).to include("Title can't be blank")
+          expect(CGI.unescapeHTML(response.body)).to include("募集タイトルを入力してください")
         end
       end
 
@@ -129,8 +129,15 @@ RSpec.describe "Recruitments", type: :request do
       end
 
       it "編集、削除ボタンが表示される" do
-        expect(response.body).to include("編集")
-        expect(response.body).to include("削除")
+        html = response.parsed_body
+
+        expect(
+          html.at_css("a[href='#{edit_recruitment_path(recruitment)}'][aria-label='編集']")
+        ).to be_present
+
+        expect(
+          html.at_css("form[action='#{recruitment_path(recruitment)}'] button[aria-label='削除']")
+        ).to be_present
       end
     end
 
@@ -245,7 +252,7 @@ RSpec.describe "Recruitments", type: :request do
         end
 
         it "エラーメッセージが表示される" do
-          expect(CGI.unescapeHTML(response.body)).to include("Title can't be blank")
+          expect(CGI.unescapeHTML(response.body)).to include("募集タイトルを入力してください")
         end
       end
 

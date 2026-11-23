@@ -49,6 +49,10 @@ RSpec.describe "SignUps", type: :request do
           post sign_up_path, params: invalid_params
         }.not_to change(User, :count)
       end
+      it "ステータス422が返る" do
+        post sign_up_path, params: invalid_params
+        expect(response).to have_http_status(:unprocessable_content)
+      end
     end
     context "期が空白の場合" do
       let(:invalid_params) do
@@ -69,6 +73,24 @@ RSpec.describe "SignUps", type: :request do
           post sign_up_path, params: invalid_params
         }.not_to change(User, :count)
       end
+      it "ステータス422が返る" do
+        post sign_up_path, params: invalid_params
+        expect(response).to have_http_status(:unprocessable_content)
+      end
+    end
+    context "名前が51文字以上の場合" do
+      let(:invalid_params) do
+        { user: attributes_for(:user, name: "a" * 51) }
+      end
+      it "アカウントが作成できない" do
+        expect {
+          post sign_up_path, params: invalid_params
+        }.not_to change(User, :count)
+      end
+      it "ステータス422が返る" do
+        post sign_up_path, params: invalid_params
+        expect(response).to have_http_status(:unprocessable_content)
+      end
     end
     context "パスワードが空白の場合" do
       let(:invalid_params) do
@@ -78,6 +100,10 @@ RSpec.describe "SignUps", type: :request do
         expect {
           post sign_up_path, params: invalid_params
         }.not_to change(User, :count)
+      end
+      it "ステータス422が返る" do
+        post sign_up_path, params: invalid_params
+        expect(response).to have_http_status(:unprocessable_content)
       end
     end
     context "パスワードが8文字未満の場合" do
@@ -89,6 +115,10 @@ RSpec.describe "SignUps", type: :request do
           post sign_up_path, params: invalid_params
         }.not_to change(User, :count)
       end
+      it "ステータス422が返る" do
+        post sign_up_path, params: invalid_params
+        expect(response).to have_http_status(:unprocessable_content)
+      end
     end
     context "パスワードと確認用パスワードが一致しない場合" do
       let(:invalid_params) do
@@ -98,6 +128,10 @@ RSpec.describe "SignUps", type: :request do
         expect {
           post sign_up_path, params: invalid_params
         }.not_to change(User, :count)
+      end
+      it "ステータス422が返る" do
+        post sign_up_path, params: invalid_params
+        expect(response).to have_http_status(:unprocessable_content)
       end
     end
 

@@ -87,7 +87,7 @@ RSpec.describe "Sessions", type: :request do
     context "ログイン済みの場合" do
       before do
         log_in(user)
-        get home_path
+        get root_path
       end
 
       it "ログアウトボタンが表示される" do

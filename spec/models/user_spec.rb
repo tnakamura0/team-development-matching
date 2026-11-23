@@ -19,6 +19,23 @@ RSpec.describe User, type: :model do
           expect(user.errors[:name]).to be_present
         end
       end
+
+      context "50文字の場合" do
+        before { user.name = "a" * 50 }
+
+        it "有効である" do
+          expect(user).to be_valid
+        end
+      end
+
+      context "51文字の場合" do
+        before { user.name = "a" * 51 }
+
+        it "無効である" do
+          expect(user).to be_invalid
+          expect(user.errors[:name]).to be_present
+        end
+      end
     end
 
     describe "メールアドレス" do
@@ -42,6 +59,23 @@ RSpec.describe User, type: :model do
 
       context "大文字小文字だけが異なるメールアドレスが存在する場合" do
         before { create(:user, email_address: user.email_address.upcase) }
+
+        it "無効である" do
+          expect(user).to be_invalid
+          expect(user.errors[:email_address]).to be_present
+        end
+      end
+
+      context "255文字の場合" do
+        before { user.email_address = "#{"a" * 243}@example.com" }
+
+        it "有効である" do
+          expect(user).to be_valid
+        end
+      end
+
+      context "256文字の場合" do
+        before { user.email_address = "#{"a" * 244}@example.com" }
 
         it "無効である" do
           expect(user).to be_invalid

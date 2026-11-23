@@ -1,0 +1,78 @@
+ja:
+  shared:
+    header:
+      create_recruitment: "+募集を作成"
+      mypage: "マイページ"
+      logout: "ログアウト"
+      login: "ログイン"
+      sign_up: "新規登録"
+      notifications: "通知"
+      menu: "メニュー"
+
+  recruitments:
+    recruitment:
+      accepting: "募集中"
+      closed: "募集終了"
+      closing_date: "募集締切日"
+      positions_count: "募集人数"
+      people_count: "%{count}名"
+    edit:
+      submit: "更新する"
+      back_to_detail: "詳細に戻る"
+    index:
+      title: "仲間を探す"
+      sub_title: "気になる募集から、チーム開発の第一歩を。"
+      empty_message: "現在募集がありません"
+    new:
+      submit: "作成する"
+      back_to_index: "一覧に戻る"
+    show:
+      closing_date: "締切日"
+      positions_count: "募集人数"
+      people_count: "%{count}名"
+      required_status: "募集基準"
+      accepting: "募集中"
+      stopped: "募集停止中"
+      edit: "編集"
+      delete: "削除"
+      login: "ログイン"
+      delete_confirm: "本当に削除しますか？"
+      back_to_index: "一覧に戻る"
+      application_pending: "承認待ち"
+      application_approved: "承認済み"
+      application_rejected: "お見送り"
+      pending_description: "募集者が確認中です。"
+      approved_description: "承認されました。"
+      rejected_description: "今回はお見送りとなりました。"
+      application_conditions: "応募条件"
+      approved_count: "（%{count}名承認済み）"
+      login_to_apply: "応募するには"
+      login_to_apply_suffix: "してください。"
+      apply: "応募する"
+      already_applied: "応募済み"
+      application_confirm: "この募集に応募しますか？"
+      applicants: "応募者"
+      applicant_count: "%{count}人"
+      no_applications: "現在、応募がありません。"
+      term_placeholder: "◯期"
+      approve: "承認する"
+      reject: "お見送りする"
+      approve_confirm: "%{name}さんを承認しますか？"
+      reject_confirm: "%{name}さんを見送りますか？"
+      approved_label: "承認"
+      rejected_label: "お見送り"
+
+  sessions:
+    new:
+      title: "ログイン"
+      submit: "ログインする"
+      sign_up_message: "アカウントをお持ちでない方は"
+      sign_up: "新規登録"
+
+  sign_ups:
+    show:
+      title: "新規登録"
+      password_hint: "8文字以上で入力してください"
+      submit: "登録する"
+      login_message: "アカウントをお持ちの方は"
+      login: "ログイン"
