@@ -9,7 +9,7 @@
         <%= link_to t(".create_recruitment"), new_recruitment_path, class: "btn-primary" %>
         <%= link_to t(".mypage"), "#", class: "text-text-secondary hover:text-primary transition-colors" %>
 
-        <%# TODO: #84 通知機能はMVP対象外のため非表示。実装時にif falseを外す %>
+        <%# TODO: #102 通知機能はMVP対象外のため非表示。実装時にif falseを外す %>
         <% if false %>
           <%= link_to "#", class: "p-2 rounded-full text-text-secondary hover:text-primary transition-colors", aria: { label: t(".notifications") } do %>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" >
@@ -56,7 +56,7 @@
           <%= t(".mypage") %>
         <% end %>
 
-        <%# TODO: #84 通知機能はMVP対象外のため非表示。実装時にif falseを外す %>
+        <%# TODO: #102 通知機能はMVP対象外のため非表示。実装時にif falseを外す %>
         <% if false %>
           <%= link_to "#", class: "flex items-center gap-3 px-8 py-3 text-text-secondary hover:bg-surface-hover active:bg-surface-hover" do %>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">

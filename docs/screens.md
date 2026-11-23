@@ -8,7 +8,7 @@
 | S-3 | 応募一覧（ホーム） | `/` | 不要 | UC-2 |
 | S-4 | 応募作成・編集 | `/recruits/new`ほか | 必要 | UC-5 |
 | S-5 | 応募詳細 | `/recruits/:id` | 不要 | UC-1, UC-2, UC-4 |
-| S-6 | 通知一覧 | `/notifications` | 必要 | UC-6 |
+| S-6 | 通知一覧【拡張】 | `/notifications` | 必要 | UC-6 |
 
 ## 画面遷移図
 
@@ -23,7 +23,7 @@ flowchart TD
         C["S-3<br>応募一覧（ホーム）"]
         D["S-4<br>応募作成"]
         E["S-5<br>応募詳細"]
-        F["S-6<br>通知一覧"]
+        F["S-6<br>通知一覧【拡張】"]
     end
 
     A -->|ログイン成功| C
