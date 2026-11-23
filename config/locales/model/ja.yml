@@ -18,6 +18,7 @@ ja:
         taken: "はすでに使用されています"
         invalid: "の形式が正しくありません"
         too_short: "は%{count}文字以上で入力してください"
+        too_long: "は%{count}文字以内で入力してください"
         confirmation: "とパスワードの入力が一致しません"
         not_a_number: "は数値で入力してください"
         not_an_integer: "整数で入力してください"
