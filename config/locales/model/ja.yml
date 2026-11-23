@@ -1,4 +1,6 @@
 ja:
+  errors:
+    format: "%{attribute}%{message}"
   activerecord:
     attributes:
       user:
