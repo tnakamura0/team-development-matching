@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # TODO: #103 パスワード再設定はMVP対象外のため無効化。実装時に有効化する
   # resources :passwords, param: :token
   resource :sign_up, only: [ :show, :create ]
-  resources :users, only: [ :show ]
+  resources :users, only: [ :show, :edit, :update ]
   resources :recruitments, only: [ :index, :show, :new, :create, :edit, :update, :destroy ] do
     resources :applications, only: [ :create ] do
       member do
