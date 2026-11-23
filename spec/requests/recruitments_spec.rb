@@ -125,8 +125,15 @@ RSpec.describe "Recruitments", type: :request do
       end
 
       it "編集、削除ボタンが表示される" do
-        expect(response.body).to include("編集")
-        expect(response.body).to include("削除")
+        html = response.parsed_body
+
+        expect(
+          html.at_css("a[href='#{edit_recruitment_path(recruitment)}'][aria-label='編集']")
+        ).to be_present
+
+        expect(
+          html.at_css("form[action='#{recruitment_path(recruitment)}'] button[aria-label='削除']")
+        ).to be_present
       end
     end
 
