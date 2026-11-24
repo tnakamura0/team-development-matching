@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to @user, notice: t(".success")
+      redirect_to @user, notice: "プロフィールを更新しました。"
     else
       render :edit, status: :unprocessable_content
     end
