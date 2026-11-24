@@ -16,6 +16,12 @@ ja:
         closing_date: "募集締切日"
         positions_count: "募集人数"
         required_status: "募集基準"
+      notification:
+        recipient: "通知先"
+        actor: "通知元"
+        application: "応募"
+        action: "通知種別"
+        read_at: "既読日時"
     errors:
       messages:
         blank: "を入力してください"
@@ -27,6 +33,8 @@ ja:
         not_a_number: "は数値で入力してください"
         not_an_integer: "は整数で入力してください"
         greater_than: "は%{count}より大きい値にしてください"
+        inclusion: "は一覧にありません"
+        required: "を入力してください"
       models:
         recruitment:
           attributes:
@@ -39,6 +47,10 @@ ja:
               no_remaining_positions: "残り枠がないため承認できません"
               cannot_apply_to_own_recruitment: "募集作成者のため応募できません"
               recruitment_closed: "この応募は締め切られています"
+        notification:
+          attributes:
+            base:
+              cannot_notify_yourself: "自分自身への通知は作成できません"
   enums:
     recruitment:
       required_status:

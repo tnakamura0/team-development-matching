@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_20_093005) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_24_130123) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -23,6 +23,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_20_093005) do
     t.index ["recruitment_id"], name: "index_applications_on_recruitment_id"
     t.index ["user_id", "recruitment_id"], name: "index_applications_on_user_id_and_recruitment_id", unique: true
     t.index ["user_id"], name: "index_applications_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "recipient_id", null: false
+    t.bigint "actor_id", null: false
+    t.bigint "application_id", null: false
+    t.string "action", null: false
+    t.datetime "read_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["actor_id"], name: "index_notifications_on_actor_id"
+    t.index ["application_id", "action"], name: "index_notifications_on_application_id_and_action", unique: true
+    t.index ["recipient_id", "created_at"], name: "index_notifications_on_recipient_id_and_created_at"
   end
 
   create_table "recruitments", force: :cascade do |t|
@@ -58,6 +71,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_20_093005) do
 
   add_foreign_key "applications", "recruitments"
   add_foreign_key "applications", "users"
+  add_foreign_key "notifications", "applications"
+  add_foreign_key "notifications", "users", column: "actor_id"
+  add_foreign_key "notifications", "users", column: "recipient_id"
   add_foreign_key "recruitments", "users"
   add_foreign_key "sessions", "users"
 end

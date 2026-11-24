@@ -1,6 +1,7 @@
 class Application < ApplicationRecord
   belongs_to :recruitment
   belongs_to :user
+  has_many :notifications, dependent: :destroy
 
   enum :status, {
     pending: "pending",
