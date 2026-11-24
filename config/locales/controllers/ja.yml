@@ -28,3 +28,12 @@ ja:
       success: "募集を更新しました"
     destroy:
       success: "募集を削除しました"
+
+  users:
+    update:
+      success: "プロフィールを更新しました。"
+
+  applications:
+    created: "応募しました"
+    approved: "承認しました"
+    rejected: "見送りました"
