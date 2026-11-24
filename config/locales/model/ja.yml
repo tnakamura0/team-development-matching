@@ -45,3 +45,8 @@ ja:
         basic_step_completed: "基礎STEP完了"
         advanced_step_completed: "応用STEP完了"
         graduated: "卒業済み"
+    user:
+      required_status:
+        basic_step_completed: "基礎STEP完了"
+        advanced_step_completed: "応用STEP完了"
+        graduated: "卒業済み"
