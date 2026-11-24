@@ -26,19 +26,19 @@ class Application < ApplicationRecord
 
   def must_be_pending
     if status_changed? && status_was != "pending"
-      errors.add(:base, I18n.t("errors.application.already_processed"))
+      errors.add(:base, :already_processed)
     end
   end
 
   def positions_must_remain
     if status_changed? && approved? && recruitment.remaining_positions_count.zero?
-      errors.add(:base, I18n.t("errors.application.no_remaining_positions"))
+      errors.add(:base, :no_remaining_positions)
     end
   end
 
   def cannot_apply_to_own_recruitment
     if user_id == recruitment&.user_id
-      errors.add(:base, I18n.t("errors.application.cannot_apply_to_own_recruitment"))
+      errors.add(:base, :cannot_apply_to_own_recruitment)
     end
   end
 
@@ -46,7 +46,7 @@ class Application < ApplicationRecord
     return if recruitment.nil?
 
     unless recruitment.accepting_applications && recruitment.closing_date >= Date.current
-      errors.add(:base, I18n.t("errors.application.recruitment_closed"))
+      errors.add(:base, :recruitment_closed)
     end
   end
 end
