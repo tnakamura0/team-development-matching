@@ -27,6 +27,18 @@ ja:
         not_a_number: "は数値で入力してください"
         not_an_integer: "は整数で入力してください"
         greater_than: "は%{count}より大きい値にしてください"
+      models:
+        recruitment:
+          attributes:
+            closing_date:
+              greater_than_or_equal_to: "は今日以降の日付を入力してください"
+        application:
+          attributes:
+            base:
+              already_processed: "この応募はすでに処理済みです"
+              no_remaining_positions: "残り枠がないため承認できません"
+              cannot_apply_to_own_recruitment: "募集作成者のため応募できません"
+              recruitment_closed: "この応募は締め切られています"
   enums:
     recruitment:
       required_status:

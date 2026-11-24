@@ -6,7 +6,7 @@ class ApplicationsController < ApplicationController
     application = recruitment.applications.new(user: Current.user)
 
     if application.save
-      redirect_to recruitment_path(recruitment), notice: "応募しました"
+      redirect_to recruitment_path(recruitment), notice: t("applications.created")
     else
       redirect_to recruitment_path(recruitment), alert: application.errors.full_messages.to_sentence
     end
@@ -14,7 +14,7 @@ class ApplicationsController < ApplicationController
 
   def approve
     if @application.approve
-      redirect_to recruitment_path(@recruitment), notice: "承認しました", status: :see_other
+      redirect_to recruitment_path(@recruitment), notice: t("applications.approved"), status: :see_other
     else
       redirect_to recruitment_path(@recruitment), alert: @application.errors.full_messages.to_sentence, status: :see_other
     end
@@ -22,7 +22,7 @@ class ApplicationsController < ApplicationController
 
   def reject
     if @application.reject
-      redirect_to recruitment_path(@recruitment), notice: "見送りました", status: :see_other
+      redirect_to recruitment_path(@recruitment), notice: t("applications.rejected"), status: :see_other
     else
       redirect_to recruitment_path(@recruitment), alert: @application.errors.full_messages.to_sentence, status: :see_other
     end

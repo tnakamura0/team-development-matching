@@ -22,7 +22,7 @@
       <%= form.label :required_status, class: "label" %>
       <%= form.select :required_status,
         Recruitment.required_statuses.keys.map { |key|
-          [I18n.t("enums.recruitment.required_status.#{key}"), key]
+          [t("enums.recruitment.required_status.#{key}"), key]
         },
         {},
         class: "select" %>
