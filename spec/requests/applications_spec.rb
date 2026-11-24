@@ -202,7 +202,7 @@ RSpec.describe "Applications", type: :request do
           expect(body).to include("応募太郎")
           expect(body).to include("花子")
           expect(body).to include("次郎")
-          expect(body).to include("◯期")
+          expect(body).to include("50期")
         end
 
         it "承認待ちの応募者に確認ダイアログ付きの有効な承認ボタンが表示される" do
