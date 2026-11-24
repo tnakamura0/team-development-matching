@@ -110,10 +110,6 @@ RSpec.describe "Recruitments", type: :request do
         expect(response.body).not_to include("編集")
         expect(response.body).not_to include("削除")
       end
-
-      it "募集者のマイページへのリンクが表示される" do
-        expect(response.body).to include(user_path(owner))
-      end
     end
 
     context "投稿者本人がログインしている場合" do

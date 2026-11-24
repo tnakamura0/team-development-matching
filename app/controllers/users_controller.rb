@@ -1,9 +1,7 @@
 class UsersController < ApplicationController
-  allow_unauthenticated_access only: [ :show ]
-  before_action :set_current_user, only: [ :edit, :update ]
+  before_action :set_current_user, only: [ :show, :edit, :update ]
 
   def show
-    @user = User.find(params[:id])
   end
 
   def edit

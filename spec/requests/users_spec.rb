@@ -19,11 +19,6 @@ RSpec.describe "Users", type: :request do
         expect(response).to have_http_status(:ok)
       end
 
-      it "他のユーザーのページにアクセスできる" do
-        get user_path(other_user)
-        expect(response).to have_http_status(:ok)
-      end
-
       it "ヘッダーに自分のマイページへのリンクが表示される" do
         get root_path
         expect(response.body).to include(%(href="#{user_path(user)}">マイページ</a>))
@@ -46,19 +41,9 @@ RSpec.describe "Users", type: :request do
     end
 
     context "未ログインの場合" do
-      it "マイページを閲覧できる" do
-        get user_path(user)
-        expect(response).to have_http_status(:ok)
-      end
-
       it "他のユーザーのメールアドレスは表示されない" do
         get user_path(other_user)
         expect(response.body).not_to include(other_user.email_address)
-      end
-
-      it "学習ステータスが表示される" do
-        get user_path(user)
-        expect(response.body).to include("基礎STEP完了")
       end
     end
 
