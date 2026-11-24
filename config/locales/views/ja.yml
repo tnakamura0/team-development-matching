@@ -54,7 +54,7 @@ ja:
       applicants: "応募者"
       applicant_count: "%{count}人"
       no_applications: "現在、応募がありません。"
-      term_placeholder: "◯期"
+      user_period: "%{period}期"
       approve: "承認する"
       reject: "お見送りする"
       approve_confirm: "%{name}さんを承認しますか？"

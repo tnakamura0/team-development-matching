@@ -1,7 +1,7 @@
 <div class="form-card">
   <h1 class="page-title text-center"><%= t(".title") %></h1>
 
-  <%= form_with model: @user, class: "space-y-5 text-text-secondary" do |form| %>
+  <%= form_with model: @user, class: "mt-5 space-y-5 text-text-secondary" do |form| %>
     <% if form.object.errors.any? %>
       <div class="text-danger">
         Error: <%= form.object.errors.full_messages.first %>
@@ -31,9 +31,14 @@
     <div>
       <%= form.submit t(".submit"), class: "w-full text-center btn-primary" %>
     </div>
+  <% end %>
+</div>
 
-    <div class="text-center">
-      <%= link_to t(".back_to_mypage"), user_path(@user), class: "link" %>
-    </div>
+<div class="my-6">
+  <%= link_to user_path(@user), class: "link inline-flex items-center gap-1" do %>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+    </svg>
+    <%= t(".back_to_mypage") %>
   <% end %>
 </div>
