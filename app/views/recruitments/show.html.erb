@@ -81,7 +81,7 @@
         <p class="truncate"><%= @recruitment.user.name %></p>
         <p class="shrink-0">
           <span class="px-1.5 text-text-muted border border-border rounded-xl"><%= t(".user_period", period: @recruitment.user.period) %></span>
-          <span class="px-1.5 text-text-muted border border-border rounded-xl"><%= @recruitment.user.required_status %></span>
+          <span class="px-1.5 text-text-muted border border-border rounded-xl"><%= t("enums.user.required_status.#{@recruitment.user.required_status}") %></span>
         </p>
       </div>
     </div>
@@ -185,7 +185,7 @@
                   </span>
                 </p>
                 <p>
-                  <%= application.user.required_status %>
+                  <%= t("enums.user.required_status.#{application.user.required_status}") %>
                 </p>
               </div>
 
