@@ -64,7 +64,7 @@
 
 /* リンク表示用 */
 @utility link {
-  @apply border-b border-dashed;
+  @apply underline underline-offset-2 decoration-dashed;
 
   &:hover {
     @apply text-primary
@@ -95,7 +95,7 @@
 
 /* フォーム要素を内包するカードデザイン */
 @utility form-card {
-  @apply lg:w-4/5 mx-auto p-8 border border-border rounded-2xl bg-surface;
+  @apply mb-8 p-8 sm:px-16 border border-border rounded-2xl bg-surface;
 }
 
 /* 個別の入力フォームに付与するラベル */
