@@ -15,14 +15,6 @@ class Notification < ApplicationRecord
   scope :unread, -> { where(read_at: nil) }
   scope :recent, -> { order(created_at: :desc) }
 
-  def read?
-    read_at.present?
-  end
-
-  def unread?
-    !read?
-  end
-
   private
 
   def cannot_notify_yourself
