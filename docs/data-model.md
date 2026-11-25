@@ -102,8 +102,8 @@
 
 #### notifications_actionの値(enum)
 
-| 値 | 意味 | 受信者 |
-|---|---|---|
-| applied | 応募があった | 募集者 |
-| approved | 応募が承認された | 応募者 |
-| rejected | 応募が見送られた | 応募者 |
+| 値 | 意味 | 受信者（recipient） | 発生元（actor） |
+|---|---|---|---|
+| applied | 応募があった | 募集者 | 応募者 |
+| approved | 応募が承認された | 応募者 | 募集者 |
+| rejected | 応募が見送られた | 応募者 | 募集者 |
