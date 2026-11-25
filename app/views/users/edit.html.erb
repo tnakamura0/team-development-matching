@@ -1,9 +1,7 @@
 <% breadcrumb :edit_profile, @user %>
 
 <div class="form-card">
-  <h1 class="page-title text-center"><%= t(".title") %></h1>
-
-  <%= form_with model: @user, class: "mt-5 space-y-5 text-text-secondary" do |form| %>
+  <%= form_with model: @user, class: "space-y-5 text-text-secondary" do |form| %>
     <% if form.object.errors.any? %>
       <div class="text-danger">
         Error: <%= form.object.errors.full_messages.first %>

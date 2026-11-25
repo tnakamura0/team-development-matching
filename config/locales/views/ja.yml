@@ -78,7 +78,6 @@ ja:
 
   users:
     edit:
-      title: "プロフィール編集"
       submit: "更新する"
     show:
       period: "期"
