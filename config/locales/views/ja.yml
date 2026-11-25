@@ -89,6 +89,7 @@ ja:
       profile_edit: "プロフィール編集"
 
   breadcrumbs:
+    label: パンくずリスト
     recruitments: 募集一覧
     show_recruitment: 募集詳細
     new_recruitment: 募集作成

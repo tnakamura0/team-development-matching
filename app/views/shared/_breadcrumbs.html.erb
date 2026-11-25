@@ -1,0 +1,28 @@
+<% breadcrumbs.tap do |links| %>
+  <% if links.any? %>
+    <nav class="mb-4" aria-label=<%= t("breadcrumbs.label") %>>
+      <ol class="flex flex-wrap items-center gap-2">
+        <% links.each_with_index do |link, index| %>
+          <li class="flex items-center gap-2">
+            <%# 先頭のパンくずの前では区切りアイコンを非表示にする %>
+            <% unless index.zero? %>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+              </svg>
+            <% end %>
+
+            <%# 現在の画面は強調して表示する %>
+            <% if link.current? %>
+              <span class="font-medium" aria-current="page">
+                <%= link.text %>
+              </span>
+            <%# 親の画面はリンクとして表示する %>
+            <% else %>
+              <%= link_to link.text, link.url, class: "link text-text-secondary" %>
+            <% end %>
+          </li>
+        <% end %>
+      </ol>
+    </nav>
+  <% end %>
+<% end %>
