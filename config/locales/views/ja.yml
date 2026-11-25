@@ -18,14 +18,12 @@ ja:
       people_count: "%{count}名"
     edit:
       submit: "更新する"
-      back_to_detail: "詳細に戻る"
     index:
       title: "仲間を探す"
       sub_title: "気になる募集から、チーム開発の第一歩を。"
       empty_message: "現在募集がありません"
     new:
       submit: "作成する"
-      back_to_index: "一覧に戻る"
     show:
       closing_date: "締切日"
       positions_count: "募集人数"
@@ -37,7 +35,6 @@ ja:
       delete: "削除"
       login: "ログイン"
       delete_confirm: "本当に削除しますか？"
-      back_to_index: "一覧に戻る"
       application_pending: "承認待ち"
       application_approved: "承認済み"
       application_rejected: "お見送り"
@@ -81,9 +78,16 @@ ja:
 
   users:
     edit:
-      title: "プロフィール編集"
       submit: "更新する"
-      back_to_mypage: "マイページに戻る"
     show:
       period: "期"
       profile_edit: "プロフィール編集"
+
+  breadcrumbs:
+    label: パンくずリスト
+    recruitments: 募集一覧
+    show_recruitment: 募集詳細
+    new_recruitment: 募集作成
+    edit_recruitment: 募集編集
+    mypage: マイページ
+    edit_profile: プロフィール編集

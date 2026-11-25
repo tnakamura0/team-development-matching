@@ -1,14 +1,14 @@
-<div>
-  <h1 class="page-title"><%= t(".title") %></h1>
-  <p class="mt-2 text-text-secondary"><%= t(".sub_title") %></p>
+<% breadcrumb :recruitments %>
 
-  <div class="my-5">
-    <% if @recruitments.present? %>
-      <div class="space-y-3">
-        <%= render @recruitments %>
-      </div>
-    <% else %>
-      <p><%= t(".empty_message") %></p>
-    <% end %>
-  </div>
+<h1 class="page-title"><%= t(".title") %></h1>
+<p class="mt-2 text-text-secondary"><%= t(".sub_title") %></p>
+
+<div class="my-5">
+  <% if @recruitments.present? %>
+    <div class="space-y-3">
+      <%= render @recruitments %>
+    </div>
+  <% else %>
+    <p><%= t(".empty_message") %></p>
+  <% end %>
 </div>
