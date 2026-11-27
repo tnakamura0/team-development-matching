@@ -92,8 +92,7 @@
 | カラム | 型 | 制約 | 説明 |
 |---|---|---|---|
 | id | bigint | PK | 主キー |
-| recipient_id | bigint | FK, null: false | 外部キー（通知を受け取るユーザー: 募集者） |
-| actor_id | bigint | FK, null: false | 外部キー（通知の発生元ユーザー: 応募者） |
+| recipient_id | bigint | FK, null: false | 外部キー（通知を受け取るユーザー） |
 | application_id | bigint | FK, null: false | 外部キー（対象の応募） |
 | action | string | null: false | 通知種別 |
 | read_at | datetime | なし | 既読日時(nil = 未読) |
@@ -102,8 +101,8 @@
 
 #### notifications_actionの値(enum)
 
-| 値 | 意味 | 受信者（recipient） | 発生元（actor） |
-|---|---|---|---|
-| applied | 応募があった | 募集者 | 応募者 |
-| approved | 応募が承認された | 応募者 | 募集者 |
-| rejected | 応募が見送られた | 応募者 | 募集者 |
+| 値 | 意味 | 受信者（recipient） |
+|---|---|---|
+| applied | 応募があった | 募集者 |
+| approved | 応募が承認された | 応募者 |
+| rejected | 応募が見送られた | 応募者 |
