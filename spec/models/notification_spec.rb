@@ -20,15 +20,6 @@ RSpec.describe Notification, type: :model do
       end
     end
 
-    context "actorが紐づいていない場合" do
-      before { notification.actor = nil }
-
-      it "無効である" do
-        expect(notification).to be_invalid
-        expect(notification.errors[:actor]).to be_present
-      end
-    end
-
     context "applicationが紐づいていない場合" do
       before { notification.application = nil }
 
@@ -44,15 +35,6 @@ RSpec.describe Notification, type: :model do
       it "無効である" do
         expect(notification).to be_invalid
         expect(notification.errors[:action]).to be_present
-      end
-    end
-
-    context "自分自身への通知の場合" do
-      before { notification.actor = notification.recipient }
-
-      it "無効である" do
-        expect(notification).to be_invalid
-        expect(notification.errors[:base]).to include("自分自身への通知は作成できません")
       end
     end
 
@@ -100,12 +82,6 @@ RSpec.describe Notification, type: :model do
     context "recipientを削除した場合" do
       it "通知も削除される" do
         expect { notification.recipient.destroy }.to change(Notification, :count).by(-1)
-      end
-    end
-
-    context "actorを削除した場合" do
-      it "通知も削除される" do
-        expect { notification.actor.destroy }.to change(Notification, :count).by(-1)
       end
     end
 

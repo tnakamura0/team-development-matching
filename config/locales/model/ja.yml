@@ -18,7 +18,6 @@ ja:
         required_status: "募集基準"
       notification:
         recipient: "通知先"
-        actor: "通知元"
         application: "応募"
         action: "通知種別"
         read_at: "既読日時"
@@ -47,10 +46,6 @@ ja:
               no_remaining_positions: "残り枠がないため承認できません"
               cannot_apply_to_own_recruitment: "募集作成者のため応募できません"
               recruitment_closed: "この応募は締め切られています"
-        notification:
-          attributes:
-            base:
-              cannot_notify_yourself: "自分自身への通知は作成できません"
   enums:
     recruitment:
       required_status:

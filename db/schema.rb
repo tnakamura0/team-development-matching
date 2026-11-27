@@ -27,13 +27,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_24_130123) do
 
   create_table "notifications", force: :cascade do |t|
     t.bigint "recipient_id", null: false
-    t.bigint "actor_id", null: false
     t.bigint "application_id", null: false
     t.string "action", null: false
     t.datetime "read_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["actor_id"], name: "index_notifications_on_actor_id"
     t.index ["application_id", "action"], name: "index_notifications_on_application_id_and_action", unique: true
     t.index ["recipient_id", "created_at"], name: "index_notifications_on_recipient_id_and_created_at"
   end
@@ -72,7 +70,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_24_130123) do
   add_foreign_key "applications", "recruitments"
   add_foreign_key "applications", "users"
   add_foreign_key "notifications", "applications"
-  add_foreign_key "notifications", "users", column: "actor_id"
   add_foreign_key "notifications", "users", column: "recipient_id"
   add_foreign_key "recruitments", "users"
   add_foreign_key "sessions", "users"
