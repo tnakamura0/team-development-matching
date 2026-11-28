@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :sessions, dependent: :destroy
   has_many :recruitments, dependent: :destroy
   has_many :applications, dependent: :destroy
+  has_many :notifications, foreign_key: :recipient_id, inverse_of: :recipient, dependent: :destroy
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 

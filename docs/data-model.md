@@ -85,12 +85,24 @@
 
 ### notifications
 
-応募後に募集者に届く通知を管理する。
+応募、承認、見送りをアプリ内で通知する。
+
+同じ応募、同じactionの通知を1件までとする。
 
 | カラム | 型 | 制約 | 説明 |
 |---|---|---|---|
 | id | bigint | PK | 主キー |
-| user_id | bigint | FK | 外部キー（通知を受け取るユーザー: 募集者） |
-| application_id | bigint | FK | 外部キー（通知原因の応募） |
+| recipient_id | bigint | FK, null: false | 外部キー（通知を受け取るユーザー） |
+| application_id | bigint | FK, null: false | 外部キー（対象の応募） |
+| action | string | null: false | 通知種別 |
+| read_at | datetime | なし | 既読日時(nil = 未読) |
 | created_at | datetime | null: false | 作成日時 |
 | updated_at | datetime | null: false | 更新日時 |
+
+#### notifications_actionの値(enum)
+
+| 値 | 意味 | 受信者（recipient） |
+|---|---|---|
+| applied | 応募があった | 募集者 |
+| approved | 応募が承認された | 応募者 |
+| rejected | 応募が見送られた | 応募者 |

@@ -16,6 +16,11 @@ ja:
         closing_date: "募集締切日"
         positions_count: "募集人数"
         required_status: "募集基準"
+      notification:
+        recipient: "通知先"
+        application: "応募"
+        action: "通知種別"
+        read_at: "既読日時"
     errors:
       messages:
         blank: "を入力してください"
@@ -27,6 +32,8 @@ ja:
         not_a_number: "は数値で入力してください"
         not_an_integer: "は整数で入力してください"
         greater_than: "は%{count}より大きい値にしてください"
+        inclusion: "は一覧にありません"
+        required: "を入力してください"
       models:
         recruitment:
           attributes:
